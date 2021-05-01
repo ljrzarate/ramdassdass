@@ -25,16 +25,13 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Ram Dass Dass</a>
+            <%= link_to "Ram Dass Dass", root_path, class: "navbar-brand" %>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="post.html">Sample Post</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
             </div>
@@ -55,22 +52,7 @@
     </header>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-              <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-            </a>
-            <p class="post-meta">
-              Posted by
-              <a href="#!">Start Bootstrap</a>
-              on September 24, 2021
-            </p>
-          </div>
-          <hr />
-          <!-- Pager-->
-          <div class="clearfix"><a class="btn btn-primary float-right" href="#!">Older Posts →</a></div>
-        </div>
+        <%= yield %>
       </div>
     </div>
     <hr />

@@ -33,6 +33,8 @@ GEM
       kaminari (~> 1.0, >= 1.2.1)
       railties (>= 5.2, < 6.2)
       ransack (~> 2.1, >= 2.1.1)
+    activeadmin_froala_editor (0.2.12)
+      activeadmin (~> 2.0)
     activejob (5.2.5)
       activesupport (= 5.2.5)
       globalid (>= 0.3.6)
@@ -61,6 +63,22 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (10.2.4.0)
       execjs
+    aws-eventstream (1.1.1)
+    aws-partitions (1.449.0)
+    aws-sdk-core (3.114.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.43.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.94.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.2.3)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.7.4)
@@ -140,6 +158,7 @@ GEM
     io-like (0.3.1)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -171,6 +190,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
     method_source (1.0.0)
+    mini_magick (4.11.0)
     mini_mime (1.1.0)
     mini_portile2 (2.5.1)
     minitest (5.14.4)
@@ -201,6 +221,8 @@ GEM
     puma (3.12.6)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.5)
@@ -315,6 +337,8 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  activeadmin_froala_editor
+  aws-sdk-s3
   bootsnap (>= 1.1.0)
   bootstrap (~> 5.0.0.beta3)
   breadcrumbs
@@ -332,6 +356,7 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen (>= 3.0.5, < 3.2)
+  mini_magick
   money
   money-rails (~> 1.12)
   pg (>= 0.18, < 2.0)
@@ -339,6 +364,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 3.11)
+  rack-cors
   rails (~> 5.2.4, >= 5.2.4.4)
   rails-observers
   sass-rails (~> 5.0)

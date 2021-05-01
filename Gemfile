@@ -52,6 +52,10 @@ gem 'font-awesome-rails'
 gem 'rails-observers'
 gem 'sidekiq'
 gem 'activeadmin'
+gem 'activeadmin_froala_editor'
+gem 'aws-sdk-s3'
+gem 'rack-cors', require: 'rack/cors'
+gem "mini_magick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
