@@ -16,6 +16,7 @@ module Ramdassdass
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_name_prefix = "ramdassdass_#{Rails.env}"
     config.active_record.observers = [:user_observer]
   end
 end
