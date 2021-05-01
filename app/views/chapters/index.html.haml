@@ -4,7 +4,6 @@
       = link_to post_path(post) do
         / %a{:href => "post.html"}
         %h2.post-title= post.title
-        %h3.post-subtitle= post.summary
       %p.post-meta
         = post.created_at.strftime("%B %d, %Y")
     %hr/

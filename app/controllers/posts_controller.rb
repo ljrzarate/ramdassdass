@@ -6,5 +6,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    breadcrumbs.add "All Chapters", chapters_path
+    breadcrumbs.add @post.title, post_path(@post)
   end
 end
