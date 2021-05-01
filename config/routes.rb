@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :chapters, only: [:index]
+  resources :contact, only: [:index, :create]
+
 end
