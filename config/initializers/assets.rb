@@ -14,5 +14,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile +=
   %w(
     styles.css
+
+    spirituality_for_devs/cap1.png
+
     scripts.js
   )

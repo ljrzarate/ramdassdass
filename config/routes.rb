@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resources :posts
   resources :chapters, only: [:index]
   resources :contact, only: [:index, :create]
+  resources :spirituality_for_devs, only: [:index]
 
 end

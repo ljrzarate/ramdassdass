@@ -120,6 +120,10 @@ ul ol {
   margin-bottom: 0;
 }
 
+ul.circle-style {
+  list-style-type: circle;
+}
+
 dt {
   font-weight: 700;
 }
@@ -199,6 +203,12 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+}
+
+img.noice {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 svg {
@@ -10371,4 +10381,15 @@ header.masthead .post-heading .meta a {
   .post-preview > a > .post-title {
     font-size: 36px;
   }
+}
+
+
+.text-white {
+  color: white;
+  text-decoration: none;
+}
+
+.text-white:hover {
+  color: white;
+  text-decoration: none;
 }

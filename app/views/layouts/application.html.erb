@@ -35,6 +35,9 @@
                     <li class="nav-item">
                       <%= link_to "Say Hi!", contact_index_path, class: "nav-link" %>
                     </li>
+                    <li class="nav-item">
+                      <%= link_to "Spirituality for Devs!", spirituality_for_devs_path, class: "nav-link" %>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -45,8 +48,10 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
-              <h1>Ram Dass Dass</h1>
-              <span class="subheading">A Lecture From the Soul</span>
+              <%= link_to root_path, class: "text-white" do %>
+                <h1>Ram Dass Dass</h1>
+                <span class="subheading">A Lecture From the Soul</span>
+              <%- end %>
             </div>
           </div>
         </div>
