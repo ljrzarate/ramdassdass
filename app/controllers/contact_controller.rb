@@ -3,7 +3,7 @@ class ContactController < ApplicationController
   end
 
   def create
-    ContactFormJob.perform_later(contact_params)
+    ContactFormJob.perform_later(contact_params[:name], contact_params[:email], contact_params[:message])
     flash[:notice] =
       'Thank you for the message, soon I will be answer | Gracias por el mensaje, pronto te contestare :)'
     redirect_to contact_index_path
