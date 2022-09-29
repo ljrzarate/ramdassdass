@@ -1,7 +1,40 @@
-%article
+%article.my-70
   .container
     .row
       .col-lg-8.col-md-10.mx-auto
         = render partial: "shared/breadcrumbs"
         %h1= @post.title
         = @post.content.html_safe
+
+%hr
+  .container
+    .row
+      %h5 Say hi:
+      .col-lg-8.col-md-10.mx-auto
+        = form_with url: post_comments_path(post_id: @post.id), html: {id: 'contactForm'} do |form|
+          .control-group
+            .form-group.floating-label-form-group.controls
+              %label Name:
+              = form.text_field :name, class: "form-control", placeholder: "name@example.com"
+          .control-group
+            .form-group.floating-label-form-group.controls
+              %label Comment:
+              = form.text_area :content, class: "form-control", placeholder: "Be nice, bitch!", rows: 3
+          %br/
+          .control-group
+            = form.submit "Send", class: "btn btn-primary", id: "sendMessageButton"
+          %br/
+%hr
+%article
+  .container
+    .row
+      %h5 Comments:
+      .col-lg-8.col-md-10.mx-auto
+        - if @comments.any?
+          - @comments.each do |comment|
+            .card.mb-4
+              .card-body
+                %p= comment.content
+                .d-flex.justify-content-between
+                  .d-flex.flex-row.align-items-center
+                    %p.small.mb-0.ms-2= comment.name

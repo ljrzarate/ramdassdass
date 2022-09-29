@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all#.includes(:comments)
+    @posts = Post.all.order('created_at DESC')
   end
 
   def show
     @post = Post.find(params[:id])
-    breadcrumbs.add "All Chapters", chapters_path
+    @comments = Comment.where(post_id: @post.id).limit(20).order('created_at DESC')
+    breadcrumbs.add "All Chapters", root_path
     breadcrumbs.add @post.title, post_path(@post)
   end
 end

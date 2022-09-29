@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   devise_for :users
   root "posts#index"
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
+
   resources :chapters, only: [:index]
   resources :contact, only: [:index, :create]
   resources :spirituality_for_devs, only: [:index]
