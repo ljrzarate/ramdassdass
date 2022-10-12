@@ -1,3 +1,4 @@
+WillPaginate.per_page = 10
 if defined?(WillPaginate)
   module WillPaginate
     module ActiveRecord
