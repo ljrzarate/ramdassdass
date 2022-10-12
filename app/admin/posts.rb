@@ -25,6 +25,7 @@ ActiveAdmin.register Post do
     f.inputs do
       f.input :title
       f.input :summary
+      f.input :published
       unless resource.new_record?
         f.input :content, as: :froala_editor, input_html: { data: { options: { imageUploadParam: 'file_upload', imageUploadURL: upload_admin_post_path(resource.id), toolbarButtons: %w[undo redo  | bold italic underline strikeThrough subscript superscript outdent indent clearFormatting insertTable | insertImage insertVideo insertFile | html insertLink] } } }
       end

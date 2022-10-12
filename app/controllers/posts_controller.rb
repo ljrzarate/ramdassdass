@@ -2,6 +2,12 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.paginate(page: params[:page]).order('created_at DESC')
+    @posts = if params[:show_draft]
+               @posts = @posts.unpublished
+             else
+               @posts = @posts.published
+             end
+
   end
 
   def show
