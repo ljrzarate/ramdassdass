@@ -1,5 +1,7 @@
 .container
   .row
+    = content_for :recaptcha_js do
+      = include_recaptcha_js
     .col-lg-8.col-md-10.mx-auto
       %p Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!
       - if flash.any?
@@ -25,6 +27,9 @@
             %label Message
             = form.text_area :message, class: "form-control", id: "message", placeholder: "Message", required: true, rows: 5, data: {"validation-required-message": "Please enter a message."}
             %p.help-block.text-danger
+
+        = recaptcha_execute('contact_us')
+
         %br/
         #success
         = form.submit "Send", class: "btn btn-primary", id: "sendMessageButton"
