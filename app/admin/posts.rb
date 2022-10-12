@@ -10,7 +10,7 @@ ActiveAdmin.register Post do
   # or
   #
   permit_params do
-    permitted = [:content, :title, :summary, :main_image, images: []]
+    permitted = [:content, :title, :summary, :main_image, :published, images: []]
     #permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
