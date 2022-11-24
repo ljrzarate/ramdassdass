@@ -7,7 +7,7 @@
       - if flash.any?
         - flash.each do |type, msg|
           - alert = type == "alert" ? 'danger' : 'success'
-          %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}",role: "alert" }
+          %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}", role: "alert" }
             = msg
       = form_with url: contact_index_path, method: :post, html: {id: "contactForm" }, local: true  do |form|
         .control-group

@@ -25,10 +25,11 @@ module ApplicationHelper
 
 	def flash_class(level)
     level = level.to_sym
-    return 'alert alert-info' if level == :notice
-    return 'alert alert-success' if level == :success
-    return 'alert alert-error' if level == :error
-    return 'alert alert-error' if level == :alert
+    klasses = "col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 alert"
+    return "#{klasses} alert alert-info" if level == :notice
+    return "#{klasses} alert alert-success" if level == :success
+    return "#{klasses} alert alert-danger" if level == :error
+    return "#{klasses} alert alert-danger" if level == :alert
   end
 
 end
