@@ -1,7 +1,7 @@
 - @posts.each do |post|
   .col-lg-8.col-md-10.mx-auto
     .post-preview
-      = link_to post_path(post) do
+      = link_to post_path(post.friendly_id) do
         / %a{:href => "post.html"}
         %h2.post-title= post.title
         %h3.post-subtitle= post.summary

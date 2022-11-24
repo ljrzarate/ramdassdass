@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
   attr_accessor :remove_main_image
 
   has_one_attached :main_image
