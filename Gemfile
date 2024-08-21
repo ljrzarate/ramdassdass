@@ -29,7 +29,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem "mini_magick"
 gem 'will_paginate', '~> 3.3'
 gem 'friendly_id', '~> 5.4.0'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', github: 'adbelsham/acts-as-taggable-on', branch: 'master'
 gem 'rails-observers'
 gem 'sass-rails'
 gem 'cancancan'

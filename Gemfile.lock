@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/adbelsham/acts-as-taggable-on.git
+  revision: 74f4376061e96d294df67d9a6b7d91477512465a
+  branch: master
+  specs:
+    acts-as-taggable-on (10.0.0)
+      activerecord (>= 6.1, < 7.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -87,8 +95,6 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
-    acts-as-taggable-on (5.0.0)
-      activerecord (>= 4.2.8)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     arbre (1.7.0)
@@ -455,7 +461,7 @@ DEPENDENCIES
   activeadmin
   activeadmin_froala_editor
   activestorage
-  acts-as-taggable-on
+  acts-as-taggable-on!
   aws-sdk-s3
   bootsnap
   bootstrap (~> 5.1, >= 5.1.3)
