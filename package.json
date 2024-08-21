@@ -1,0 +1,8 @@
+{
+  "name": "ramminti",
+  "description": "A Lecture from the Soul",
+  "version": "1.0.0",
+  "engines": {
+    "node": "17.6.0"
+  }
+}
