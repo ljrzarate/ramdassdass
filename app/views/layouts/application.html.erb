@@ -56,7 +56,7 @@
         <%= render "shared/side_navbar" %>
       </div>
 
-      <div class="col-12 col-xl-9 ms-auto ms-xl-4 me-auto px-5 d-flex flex-column align-self-stretch" style="max-width: 800px">
+      <div class="col-12 col-xl-9 ms-auto ms-xl-4 me-auto px-5 d-flex flex-column align-self-stretch" style="max-width: 800px; overflow-y: hidden">
         <% flash.each do |key, value| %>
           <div class="<%= flash_class(key) %>">
             <%= value %>
