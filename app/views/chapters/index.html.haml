@@ -1,0 +1,14 @@
+- @posts.each do |post|
+  .col-lg-8.col-md-10.mx-auto
+    .post-preview
+      = link_to post_path(post) do
+        / %a{:href => "post.html"}
+        %h2.post-title= post.title
+      %p.post-meta
+        = post.created_at.strftime("%B %d, %Y")
+    %hr/
+
+/ .col-lg-8.col-md-10.mx-auto
+/   .clearfix
+/     %a.btn.btn-primary.float-right{:href => "#!"} Older Posts →
+

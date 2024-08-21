@@ -31,13 +31,15 @@ gem 'will_paginate', '~> 3.3'
 gem 'friendly_id', '~> 5.4.0'
 gem 'acts-as-taggable-on'
 gem 'rails-observers'
-gem 'activeadmin'
 gem 'sass-rails'
 gem 'cancancan'
 gem 'draper'
 gem 'pundit'
 gem 'activestorage'
 gem "image_processing"
+gem 'jquery-rails'
+gem 'popper_js'
+gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 
 
 group :development, :test do

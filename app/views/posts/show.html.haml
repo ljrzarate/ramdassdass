@@ -1,0 +1,48 @@
+%article.my-70
+  .container
+    .row
+      .col-lg-8.col-md-10.mx-auto
+        = render partial: "shared/breadcrumbs"
+        %h1= @post.title
+        = @post.content.html_safe
+
+.next-prev-wrapper
+  = link_to "prev: #{@next_post.title}", post_path(@next_post.friendly_id), class: "btn btn-secondary downset-1" if @next_post
+  = link_to "next: #{@prev_post.title}", post_path(@prev_post.friendly_id), class: "btn btn-secondary" if @prev_post
+
+%hr
+  .container
+    .row
+      %h5#sayHi Say hi:
+      .col-lg-8.col-md-10.mx-auto
+        = form_with url: post_comments_path(post_id: @post.id), html: {id: 'contactForm'} do |form|
+          - flash.each do |type, msg|
+            - alert = type == "alert" ? 'danger' : 'success'
+            %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}",role: "alert" }
+              = msg
+          .control-group
+            .form-group.floating-label-form-group.controls
+              %label E-mail:
+              = form.text_field :name, class: "form-control", placeholder: "name@example.com", value: params[:name]
+          .control-group
+            .form-group.floating-label-form-group.controls
+              %label Comment:
+              = form.text_area :content, class: "form-control", placeholder: "Be nice, bitch!", rows: 3, value: params[:content]
+          %br/
+          .control-group
+            = form.submit "Send", class: "btn btn-primary", id: "sendMessageButton"
+          %br/
+%hr
+%article
+  .container
+    .row
+      %h5 Comments:
+      .col-lg-8.col-md-10.mx-auto
+        - if @comments.any?
+          - @comments.each do |comment|
+            .card.mb-4
+              .card-body
+                %p= comment.content
+                .d-flex.justify-content-between
+                  .d-flex.flex-row.align-items-center
+                    %p.small.mb-0.ms-2= comment.name.split("@")[0]

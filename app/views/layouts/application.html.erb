@@ -2,8 +2,12 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Ramminti" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Ramminti - Lecture from the Soul" />
+    <meta name="author" content="Ramminti" />
+    <link rel="icon" type="image/x-icon" href="<%= asset_url('favicon.ico') %>" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,9 +18,73 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9P3YNX11M8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9P3YNX11M8');
+    </script>
+    <%= yield :recaptcha_js %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render partial: "shared/navbar" %>
+    <header class="masthead" style="background-image: url(<%= asset_url('hanuman.jpg') %>)">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <%= link_to root_path, class: "text-white" do %>
+                <h1>Ram Dass Dass</h1>
+                <span class="subheading">A Lecture From the Soul</span>
+              <%- end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="d-flex align-items-start align-self-stretch flex-column flex-xl-row gap-5">
+      <div class="col-12 col-xl-3 d-flex justify-content-center mx-auto mx-xl-0">
+        <%= render "shared/side_navbar" %>
+      </div>
+
+      <div class="col-12 col-xl-9 ms-auto ms-xl-4 me-auto px-5 d-flex flex-column align-self-stretch" style="max-width: 800px">
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %>">
+            <%= value %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
+    <hr />
+    <!-- Footer-->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://instagram.com/ram_dass_dass", target="_blank">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Ramminti <%= Date.current.year %> </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
