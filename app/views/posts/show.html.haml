@@ -1,10 +1,7 @@
 %article.my-70
-  .container
-    .row
-      .col-lg-8.col-md-10.mx-auto
-        = render partial: "shared/breadcrumbs"
-        %h1= @post.title
-        = @post.content.html_safe
+  = render partial: "shared/breadcrumbs"
+  %h1= @post.title
+  = @post.content.html_safe
 
 .next-prev-wrapper
   = link_to "prev: #{@next_post.title}", post_path(@next_post.friendly_id), class: "btn btn-secondary downset-1" if @next_post

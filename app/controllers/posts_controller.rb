@@ -8,8 +8,8 @@ class PostsController < ApplicationController
                @posts = @posts.published
              end
 
-    @camino_0_count = 0#Post.tagged_with(Post::CAMINO_ZERO).count
-    @cuentos_count = 0#Post.tagged_with(Post::CUENTOS).count
+    @camino_0_count = Post.tagged_with(Post::CAMINO_ZERO).count
+    @cuentos_count = Post.tagged_with(Post::CUENTOS).count
 
     @posts = Posts::ByTags.new(tag: params[:tag]).execute if params[:tag].present?
     @posts = @posts.paginate(page: params[:page]).order('created_at DESC')

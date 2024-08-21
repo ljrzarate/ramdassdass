@@ -8,7 +8,7 @@ ActiveAdmin.register Post do
   # permit_params :content, :title, :summary
   #
   # or
-  #
+
 
   filter :title
 
