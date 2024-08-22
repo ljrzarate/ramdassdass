@@ -1,18 +1,19 @@
-- @posts.each do |post|
-  .post-preview
-    - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
-    = link_to link_with_params do
-      / %a{:href => "post.html"}
-      %h2.mt-0.post-title= post.title
-      %h3.post-subtitle= post.summary
-    %div.next-prev-wrapper
-      %p.mb-0.post-meta
-        = link_to "Read More", link_with_params
-      %p.mb-0.post-meta
-        = post.created_at.strftime("%B %d, %Y")
+.d-flex.flex-column.col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.px-3.px-lg-5.align-self-stretch{:style=>"max-width: 800px; overflow-y: hidden"}
+  - @posts.each do |post|
+    .post-preview
+      - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
+      = link_to link_with_params do
+        / %a{:href => "post.html"}
+        %h2.mt-0.post-title= post.title
+        %h3.post-subtitle= post.summary
+      %div.next-prev-wrapper
+        %p.mb-0.post-meta
+          = link_to "Read More", link_with_params
+        %p.mb-0.post-meta
+          = post.created_at.strftime("%B %d, %Y")
 
-  %hr/
+    %hr/
 
-.col-lg-8.col-md-10.mx-auto
-  .digg_pagination
-    = will_paginate @posts
+  .col-lg-8.col-md-10.mx-auto.d-flex.d-xl-block.align-items-center.justify-content-center
+    .digg_pagination
+      = will_paginate @posts
