@@ -1,12 +1,13 @@
 - @posts.each do |post|
   .post-preview
-    = link_to post_path(post.friendly_id) do
+    - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
+    = link_to link_with_params do
       / %a{:href => "post.html"}
       %h2.mt-0.post-title= post.title
       %h3.post-subtitle= post.summary
     %div.next-prev-wrapper
       %p.mb-0.post-meta
-        = link_to "Read More", post_path(post.friendly_id)
+        = link_to "Read More", link_with_params
       %p.mb-0.post-meta
         = post.created_at.strftime("%B %d, %Y")
 

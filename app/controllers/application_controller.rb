@@ -2,8 +2,16 @@ require 'net/https'
 
 class ApplicationController < ActionController::Base
   allow_browser versions: :modern
+  before_action :published_posts
 
   RECAPTCHA_MINIMUM_SCORE = 0.5
+
+  def published_posts
+    @posts = params[:show_draft].present? ? Post.unpublished : Post.published
+
+    @camino_0_count = Post.camino_0_count
+    @cuentos_count = Post.cuentos_count
+  end
 
   def verify_recaptcha?(token, recaptcha_action)
     secret_key = ENV['RECAPTACH_SECRET_KEY']

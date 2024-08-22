@@ -15,4 +15,12 @@ class Post < ApplicationRecord
   scope :unpublished, lambda { where(published: false) }
 
   validates :title, presence: true
+
+  def self.camino_0_count
+    Post.published.tagged_with(CAMINO_ZERO).count
+  end
+
+  def self.cuentos_count
+    Post.published.tagged_with(CUENTOS).count
+  end
 end

@@ -1,22 +1,13 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
-    @posts = if params[:show_draft]
-               @posts = @posts.unpublished
-             else
-               @posts = @posts.published
-             end
-
-    @camino_0_count = Post.tagged_with(Post::CAMINO_ZERO).count
-    @cuentos_count = Post.tagged_with(Post::CUENTOS).count
-
     @posts = Posts::ByTags.new(tag: params[:tag]).execute if params[:tag].present?
     @posts = @posts.paginate(page: params[:page]).order('created_at DESC')
   end
 
   def show
-    active_record_posts = Post.all.order('created_at DESC').published
+    active_record_posts = params[:show_draft].present? ? Post.unpublished : Post.published
+    active_record_posts = active_record_posts.order('created_at DESC')
     @post = active_record_posts.friendly.find(params[:id])
     posts = active_record_posts.map.with_index{ |post, index| { index: index, post: post } }
 
