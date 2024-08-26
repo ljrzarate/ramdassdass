@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   RECAPTCHA_MINIMUM_SCORE = 0.5
 
   def published_posts
-    @posts = params[:show_draft].present? ? Post.unpublished : Post.published
+    @active_posts = params[:show_draft].present? ? Post.unpublished : Post.published
 
     @camino_0_count = Post.camino_0_count
     @cuentos_count = Post.cuentos_count

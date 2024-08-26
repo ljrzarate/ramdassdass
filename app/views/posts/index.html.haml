@@ -1,5 +1,5 @@
 .d-flex.flex-column.col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.px-3.px-lg-5.align-self-stretch{:style=>"max-width: 800px; overflow-y: hidden"}
-  - @posts.each do |post|
+  - @active_posts.each do |post|
     .post-preview
       - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
       = link_to link_with_params do
@@ -16,4 +16,4 @@
 
   .col-lg-8.col-md-10.mx-auto.d-flex.d-xl-block.align-items-center.justify-content-center
     .digg_pagination
-      = will_paginate @posts
+      = will_paginate @active_posts
