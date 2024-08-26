@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @active_posts = Posts::ByTags.new(tag: params[:tag]).execute if params[:tag].present?
+    @active_posts = Posts::ByTags.new(tag: params[:tag], scope: @active_posts).execute if params[:tag].present?
     @active_posts = @active_posts.paginate(page: params[:page]).order('created_at DESC')
   end
 
