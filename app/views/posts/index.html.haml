@@ -3,12 +3,15 @@
     .post-preview
       - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
       = link_to link_with_params do
-        / %a{:href => "post.html"}
         %h2.mt-0.post-title= post.title
         %h3.post-subtitle= post.summary
       %div.next-prev-wrapper
         %p.mb-0.post-meta
           = link_to "Read More", link_with_params
+          - post.tags.each do |tag|
+            - link_with_params_for_tag = params[:show_draft].present? ? posts_path(show_draft: true, tag: tag.name) : posts_path(tag: tag.name)
+            = link_to link_with_params_for_tag do
+              %span.badge.badge-pill.badge-brown=tag.name
         %p.mb-0.post-meta
           = post.created_at.strftime("%B %d, %Y")
 

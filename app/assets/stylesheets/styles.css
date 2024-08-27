@@ -5172,6 +5172,21 @@ a.badge-danger.focus {
 	box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
 }
 
+.badge-brown {
+	color: #fff;
+	background-color: #402616d4;
+}
+a.badge-brown:hover,
+a.badge-brown:focus {
+	color: #fff;
+	background-color: #402616d4;
+}
+a.badge-brown:focus,
+a.badge-brown.focus {
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+
 .badge-light {
 	color: #212529;
 	background-color: #f8f9fa;
