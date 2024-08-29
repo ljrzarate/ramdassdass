@@ -23,6 +23,14 @@ ActiveAdmin.register Post do
     render json: result
   end
 
+  index do
+    id_column
+    column :title
+    column :published
+    column :summary
+    actions
+  end
+
   form title: 'Create Post' do |f|
     f.inputs do
       f.input :title
