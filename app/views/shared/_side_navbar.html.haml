@@ -6,10 +6,10 @@
           %p= "#{shelf.name.titleize}: "
           .d-flex{style: "flex-direction: column;" }
             - shelf.boxes.each do |box|
-              = link_to "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link" do
+              = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
                 = box.title.titleize
                 = "( #{shelf.posts_by_parent_box(box.id).count} )"
               %br
         - else
-          = link_to "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link" do
+          = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
             %p= "#{shelf.name.titleize}: ( #{shelf.posts.count} )"

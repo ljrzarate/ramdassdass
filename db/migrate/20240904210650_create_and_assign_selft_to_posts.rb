@@ -11,8 +11,10 @@ class CreateAndAssignSelftToPosts < ActiveRecord::Migration[7.2]
         puts "*" * 50
         if single_post.tag_list.include?(Post::CAMINO_ZERO)
           single_post.shelf_id = camino_zero.id
+          single_post.tag_list = camino_zero.slug
         else
           single_post.shelf_id = camino_uno.id
+          single_post.tag_list = camino_uno.slug
         end
         single_post.save!
         puts single_post.slug

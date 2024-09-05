@@ -5,6 +5,7 @@ class AddParentBoxToPosts < ActiveRecord::Migration[7.2]
     parent_box = Post.find_or_create_by(is_box: true, slug: 'cuentos', shelf_id: shelf.id, title: 'cuentos')
     posts.each do |post|
       post.parent_box_id = parent_box.id
+      post.tag_list.add(parent_box.slug, shelf.slug)
       post.save!
     end
   end

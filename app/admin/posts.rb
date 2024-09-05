@@ -1,5 +1,8 @@
 ActiveAdmin.register Post do
   filter :title
+  filter :is_box
+  filter :parent_box, collection: proc { Post.where(is_box: true) }
+  filter :shelf
 
   controller do
     def find_resource
@@ -44,6 +47,7 @@ ActiveAdmin.register Post do
     column :is_box
     column :parent_box_name
     column :shelf_name
+    column :tag_list
     column :summary
     actions
   end
