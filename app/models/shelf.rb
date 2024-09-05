@@ -19,6 +19,9 @@ class Shelf < ApplicationRecord
   end
 
   def posts_by_parent_box(box_id)
+    ActiveRecord::Associations::Preloader.new(
+      records: [self], associations: :posts, scope:  Post.where(is_box: true)
+    ).call
     posts.where(parent_box_id: box_id)
   end
 end

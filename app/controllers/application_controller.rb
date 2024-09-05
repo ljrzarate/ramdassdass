@@ -18,10 +18,6 @@ class ApplicationController < ActionController::Base
     ActiveRecord::Associations::Preloader.new(
       records: @shelves, associations: :posts, scope:  Post.where(is_box: true)
     ).call
-
-    @shelves.each do |shelf|
-      shelf.posts
-    end
   end
 
   def verify_recaptcha?(token, recaptcha_action)

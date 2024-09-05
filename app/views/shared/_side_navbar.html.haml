@@ -1,13 +1,15 @@
 %nav.navbar
   %ul.navbar-nav.flex-row.flex-xl-column.flex-wrap
     - @shelves.each do |shelf|
-      %li.nav-item.me-4.me-xl-0
-        = link_to "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link" do
-          = "#{shelf.name.titleize}: "
-          - if shelf.boxes.any?
+      %li.d-flex.nav-item.me-4.me-xl-0{style: "flex-direction: row; justify-content: space-evenly; align-items: center;"}
+        - if shelf.boxes.any?
+          %p= "#{shelf.name.titleize}: "
+          .d-flex{style: "flex-direction: column;" }
             - shelf.boxes.each do |box|
-              = box.title.titleize
-              = "( #{shelf.posts_by_parent_box(box.id).count} )"
+              = link_to "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link" do
+                = box.title.titleize
+                = "( #{shelf.posts_by_parent_box(box.id).count} )"
               %br
-          - else
-            = "( #{shelf.posts.count} )"
+        - else
+          = link_to "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link" do
+            %p= "#{shelf.name.titleize}: ( #{shelf.posts.count} )"
