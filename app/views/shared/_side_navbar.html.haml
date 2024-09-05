@@ -1,6 +1,13 @@
 %nav.navbar
   %ul.navbar-nav.flex-row.flex-xl-column.flex-wrap
-    %li.nav-item.me-4.me-xl-0
-      = link_to "Camino Zero ( #{@camino_0_count} )", "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link"
-    %li.nav-item.me-4.me-xl-0
-      = link_to "Camino Uno: Cuentos ( #{@cuentos_count} )", "#{posts_path(tag: Post::CUENTOS)}", class: "nav-link"
+    - @shelves.each do |shelf|
+      %li.nav-item.me-4.me-xl-0
+        = link_to "#{posts_path(tag: Post::CAMINO_ZERO)}", class: "nav-link" do
+          = "#{shelf.name.titleize}: "
+          - if shelf.boxes.any?
+            - shelf.boxes.each do |box|
+              = box.title.titleize
+              = "( #{shelf.posts_by_parent_box(box.id).count} )"
+              %br
+          - else
+            = "( #{shelf.posts.count} )"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_27_161615) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_04_225805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,7 +95,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_27_161615) do
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "published", default: false
     t.string "slug"
+    t.boolean "is_box", default: false
+    t.integer "parent_box_id"
+    t.integer "shelf_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "shelves", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_shelves_on_slug", unique: true
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|

@@ -14,8 +14,14 @@ class ApplicationController < ActionController::Base
                       Post.published
                     end
 
-    @camino_0_count = Post.camino_0_count
-    @cuentos_count = Post.cuentos_count
+    @shelves = Shelf.select(:id, :slug, :name).includes(:posts)
+    ActiveRecord::Associations::Preloader.new(
+      records: @shelves, associations: :posts, scope:  Post.where(is_box: true)
+    ).call
+
+    @shelves.each do |shelf|
+      shelf.posts
+    end
   end
 
   def verify_recaptcha?(token, recaptcha_action)
@@ -25,5 +31,9 @@ class ApplicationController < ActionController::Base
     response = Net::HTTP.get_response(uri)
     json = JSON.parse(response.body)
     json['success'] && json['score'] > RECAPTCHA_MINIMUM_SCORE && json['action'] == recaptcha_action
+  end
+
+  def parse_boolean(value)
+    ActiveRecord::Type::Boolean.new.deserialize(value)
   end
 end
