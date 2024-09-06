@@ -7,18 +7,28 @@ ActiveAdmin.register Post do
   controller do
     def find_resource
       begin
-        scoped_collection.where(slug: params[:id]).first!
+        finder = resource_class.is_a?(FriendlyId) ? :slug : :id
+        scoped_collection.find_by(finder => params[:id])
       rescue ActiveRecord::RecordNotFound
         scoped_collection.find(params[:id])
       end
+    end
+
+    def create
+      parent_box = Post.find_by(is_box: true, id: permitted_params[:post][:parent_box_id])
+      @post = Post.new(permitted_params[:post])
+      resource.tag_list.add(resource.shelf.slug, resource.slug)
+      resource.tag_list.add(parent_box.slug) if !resource.is_box? && parent_box.present?
+      create!
     end
 
     def update
       if parse_boolean(permitted_params[:post][:published]) && resource.is_box?
         Post.where(is_box: false, parent_box_id: resource.id).update_all(published: true)
       end
-      resource.tag_list.add(resource.slug, resource.shelf.slug)
-      resource.tag_list.add(resource.parent_box.slug) unless resource.is_box?
+      parent_box = Post.find_by(is_box: true, id: permitted_params[:post][:parent_box_id])
+      resource.tag_list.add(resource.shelf.slug, resource.slug)app/models/shelf.rb
+      resource.tag_list.add(parent_box.slug)  unless  resource.is_box?
       super
     end
 
@@ -29,6 +39,7 @@ ActiveAdmin.register Post do
 
   permit_params do
     permitted = [
+      :id,
       :shelf_id, :parent_box_id, :is_box,
       :content, :title, :summary, :main_image, :published,
       tag_ids: [], images: []

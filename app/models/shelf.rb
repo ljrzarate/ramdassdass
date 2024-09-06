@@ -7,6 +7,10 @@ class Shelf < ApplicationRecord
     posts.where(is_box: false)
   end
 
+  def posts_non_boxes_non_parent
+    posts.where(is_box: false, parent_box_id: nil)
+  end
+
   def count_posts
     Post.published.where(shelf_id: self.id).count
   end
