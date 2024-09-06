@@ -3,6 +3,11 @@
     %article.my-70
       = render partial: "shared/breadcrumbs"
       %h1= @post.title
+      %h5
+        - @post.tag_list.each do |tag|
+          - link_with_params_for_tag = params[:show_draft].present? ? posts_path(show_draft: true, tag: tag) : posts_path(tag: tag)
+          = link_to link_with_params_for_tag do
+            %span.badge.badge-pill.badge-brown=tag
       = @post.content.html_safe
 = content_for :comments_on_single_post do
   .container
