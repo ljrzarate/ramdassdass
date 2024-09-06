@@ -17,6 +17,8 @@ ActiveAdmin.register Post do
       if parse_boolean(permitted_params[:post][:published]) && resource.is_box?
         Post.where(is_box: false, parent_box_id: resource.id).update_all(published: true)
       end
+      resource.tag_list.add(resource.slug, resource.shelf.slug)
+      resource.tag_list.add(resource.parent_box.slug) unless resource.is_box?
       super
     end
 

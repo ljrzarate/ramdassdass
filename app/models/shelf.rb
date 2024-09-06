@@ -3,6 +3,10 @@ class Shelf < ApplicationRecord
   friendly_id :name, use: :slugged
   has_many :posts, -> { where( published: true ) }
 
+  def posts_non_boxes
+    posts.where(is_box: false)
+  end
+
   def count_posts
     Post.published.where(shelf_id: self.id).count
   end
