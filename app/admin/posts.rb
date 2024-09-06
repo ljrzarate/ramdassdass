@@ -27,7 +27,7 @@ ActiveAdmin.register Post do
         Post.where(is_box: false, parent_box_id: resource.id).update_all(published: true)
       end
       parent_box = Post.find_by(is_box: true, id: permitted_params[:post][:parent_box_id])
-      resource.tag_list.add(resource.shelf.slug, resource.slug)app/models/shelf.rb
+      resource.tag_list.add(resource.shelf.slug, resource.slug)
       resource.tag_list.add(parent_box.slug)  unless  resource.is_box?
       super
     end
