@@ -28,7 +28,7 @@ ActiveAdmin.register Post do
       end
       parent_box = Post.find_by(is_box: true, id: permitted_params[:post][:parent_box_id])
       resource.tag_list.add(resource.shelf.slug, resource.slug)
-      resource.tag_list.add(parent_box.slug)  unless  resource.is_box?
+      resource.tag_list.add(parent_box.slug) if !resource.is_box? && parent_box.present?
       super
     end
 
