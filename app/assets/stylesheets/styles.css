@@ -7996,7 +7996,7 @@ button.bg-dark:focus {
 	margin-bottom: 70px !important;
 }
 .my-70 img {
-	width: 100% !important;
+	max-width: 100% !important;
 }
 
 .ml-0,
