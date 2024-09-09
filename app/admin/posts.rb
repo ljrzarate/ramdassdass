@@ -40,7 +40,7 @@ ActiveAdmin.register Post do
   permit_params do
     permitted = [
       :id,
-      :shelf_id, :parent_box_id, :is_box,
+      :shelf_id, :parent_box_id, :is_box, :file_upload,
       :content, :title, :summary, :main_image, :published,
       tag_ids: [], images: []
     ]
@@ -48,6 +48,7 @@ ActiveAdmin.register Post do
   end
 
   member_action :upload, method: [:post] do
+    @post = Post.find(permitted_params[:id])
     success = resource.images.attach(params[:file_upload])
     result = success ? { link: url_for(resource.images.last) } : {}
     render json: result
