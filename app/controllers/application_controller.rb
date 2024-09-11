@@ -1,7 +1,7 @@
 require 'net/https'
 
 class ApplicationController < ActionController::Base
-  allow_browser versions: :modern
+  #allow_browser versions: :modern
   before_action :published_posts
 
   RECAPTCHA_MINIMUM_SCORE = 0.5
