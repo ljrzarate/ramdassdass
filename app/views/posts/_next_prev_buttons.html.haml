@@ -1,0 +1,6 @@
+.container
+  .row
+    .paypay-checkout{style: "width: 28%"}
+    .next-prev-wrapper
+      = link_to "prev: #{next_post.title}", post_path(next_post.friendly_id), class: "btn btn-secondary downset-1" if next_post
+      = link_to "next: #{prev_post.title}", post_path(prev_post.friendly_id), class: "btn btn-secondary" if prev_post

@@ -39,7 +39,7 @@ ActiveAdmin.register Post do
 
   permit_params do
     permitted = [
-      :id,
+      :id, :is_private, :price_cents,
       :shelf_id, :parent_box_id, :is_box, :file_upload,
       :content, :title, :summary, :main_image, :published,
       tag_ids: [], images: []
@@ -57,6 +57,8 @@ ActiveAdmin.register Post do
   index do
     id_column
     column :title
+    column :is_private
+    column :price
     column :published
     column :is_box
     column :parent_box_name
@@ -71,6 +73,8 @@ ActiveAdmin.register Post do
     f.inputs do
       f.input :title
       f.input :summary
+      f.input :is_private
+      f.input :price_cents
       f.input :published
       f.input :main_image, as: :file
       f.input :shelf,

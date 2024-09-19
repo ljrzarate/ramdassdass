@@ -40,6 +40,7 @@ gem "image_processing"
 gem 'jquery-rails'
 gem 'popper_js'
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
+gem 'rest-client'
 
 
 group :development, :test do
@@ -47,6 +48,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
   gem 'pry'
+  gem 'dotenv-rails'
 end
 
 group :development do

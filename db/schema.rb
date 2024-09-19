@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_04_210650) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_19_174101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -99,6 +99,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_04_210650) do
     t.boolean "is_box", default: false
     t.integer "parent_box_id"
     t.integer "shelf_id"
+    t.boolean "is_private", default: false
+    t.integer "price_cents", default: 0
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 

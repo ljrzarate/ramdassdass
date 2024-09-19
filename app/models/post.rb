@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  monetize :price_cents
+
   CAMINO_ZERO = 'camino_0'
   CUENTOS = 'cuentos'
 
@@ -34,6 +36,10 @@ class Post < ApplicationRecord
 
   def parent_box_name
     self.parent_box&.title
+  end
+
+  def price_with_dolar_sign
+    humanized_money_with_symbol(self.price)
   end
 
   private

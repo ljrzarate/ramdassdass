@@ -1,0 +1,25 @@
+.container
+  .row
+    .div
+      %hr
+    %h5#sayHi Say hi:
+    .col-lg-8.col-md-10.mx-auto
+      - post_params = {post_id: post_id}
+      - post_params = params[:show_draft].present? ? post_params.merge!({show_draft: params[:show_draft]}) : post_params
+      = form_with url: post_comments_path(post_params), html: {id: 'contactForm'} do |form|
+        - flash.each do |type, msg|
+          - alert = type == "alert" ? 'danger' : 'success'
+          %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}",role: "alert" }
+            = msg
+        .control-group
+          .form-group.floating-label-form-group.controls
+            %label E-mail:
+            = form.text_field :name, class: "form-control", placeholder: "name@example.com", value: params[:name]
+        .control-group
+          .form-group.floating-label-form-group.controls
+            %label Comment:
+            = form.text_area :content, class: "form-control", placeholder: "Comment out...", rows: 3, value: params[:content]
+        %br/
+        .control-group
+          = form.submit "Send", class: "btn btn-primary", id: "sendMessageButton"
+        %br/

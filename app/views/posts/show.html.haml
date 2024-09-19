@@ -1,58 +1,39 @@
-.d-flex.flex-column
-  .col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.ps-lg-5{:style=>"max-width: 800px; overflow-y: hidden"}
-    %article.my-70
-      = render partial: "shared/breadcrumbs"
-      %h1= @post.title
-      %h5
-        - @post.tag_list.each do |tag|
-          - link_with_params_for_tag = params[:show_draft].present? ? posts_path(show_draft: true, tag: tag) : posts_path(tag: tag)
-          = link_to link_with_params_for_tag do
-            %span.badge.badge-pill.badge-brown=tag
-      = @post.content.html_safe
+- if @post.is_private?
+  = render partial: "posts/private_state", locals: { post: @post }
+- else
+  = render partial: "posts/post_content", locals: { post: @post }
 = content_for :comments_on_single_post do
-  .container
-    .row
-      .next-prev-wrapper
-        = link_to "prev: #{@next_post.title}", post_path(@next_post.friendly_id), class: "btn btn-secondary downset-1" if @next_post
-        = link_to "next: #{@prev_post.title}", post_path(@prev_post.friendly_id), class: "btn btn-secondary" if @prev_post
+  = render partial: "posts/next_prev_buttons", locals: { next_post: @next_post, prev_post: @prev_post }
+  = render partial: "posts/new_comment_form", locals: { post_id: @post.id }
+  = render partial: "posts/comment_list", locals: { comments: @comments }
 
-  .container
-    .row
-      .div
-        %hr
-      %h5#sayHi Say hi:
-      .col-lg-8.col-md-10.mx-auto
-        - post_params = {post_id: @post.id}
-        - post_params = params[:show_draft].present? ? post_params.merge!({show_draft: params[:show_draft]}) : post_params
-        = form_with url: post_comments_path(post_params), html: {id: 'contactForm'} do |form|
-          - flash.each do |type, msg|
-            - alert = type == "alert" ? 'danger' : 'success'
-            %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}",role: "alert" }
-              = msg
-          .control-group
-            .form-group.floating-label-form-group.controls
-              %label E-mail:
-              = form.text_field :name, class: "form-control", placeholder: "name@example.com", value: params[:name]
-          .control-group
-            .form-group.floating-label-form-group.controls
-              %label Comment:
-              = form.text_area :content, class: "form-control", placeholder: "Comment out...", rows: 3, value: params[:content]
-          %br/
-          .control-group
-            = form.submit "Send", class: "btn btn-primary", id: "sendMessageButton"
-          %br/
-  %article
-    .container
-      .row
-        .div
-          %hr
-        %h5 Comments:
-        .col-lg-8.col-md-10.mx-auto
-          - if @comments.any?
-            - @comments.each do |comment|
-              .card.mb-4
-                .card-body
-                  %p= comment.content
-                  .d-flex.justify-content-between
-                    .d-flex.flex-row.align-items-center
-                      %p.small.mb-0.ms-2= comment.name.split("@")[0]
+= content_for :paypay_buttons do
+  %script{:src => "https://sandbox.paypal.com/sdk/js?client-id=AX8h7DwgyNyRPMzhbgGJ9SRmu4ltSkXqQuqQJzURcbjOtuSbcIY5JQp3inI8wNfJVeFU2GG8bZIT0bG8"}
+  :javascript
+    paypal.Buttons({
+      async createOrder() {
+        const post_sku = '#{@post.slug}'
+        const donation_value = $("#donationValue").val()
+        const response = await fetch("/paypal/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              cart: [{
+                  sku: post_sku,
+                  quantity: 1,
+                  donation_value: donation_value
+              }]
+            })
+        });
+        const order = await response.json();
+        return order.id;
+      },
+      style: {
+        layout: "vertical",
+        borderRadius: 10,
+        color: "blue",
+        shape: "rect",
+      }
+    }).render('.paypal-conteiner');

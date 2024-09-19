@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  namespace :paypal do
+    resource :orders, only: [:create]
+  end
+
   resources :chapters, only: [:index]
   resources :contact, only: [:index, :create]
   resources :spirituality_for_devs, only: [:index]

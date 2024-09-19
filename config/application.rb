@@ -22,5 +22,9 @@ module Ramminti
     config.active_record.observers = [:user_observer]
 
     config.autoload_paths << "#{root}/app/services/*.rb"
+
+    if Rails.env.development? || Rails.env.test?
+      Dotenv::Rails.load
+    end
   end
 end
