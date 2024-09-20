@@ -1,0 +1,19 @@
+.col-lg-4.col-md-10
+  %p= "Inicar session:"
+  - if flash.any?
+    - flash.each do |type, msg|
+      - alert = type == "alert" ? 'danger' : 'success'
+      %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}", role: "alert" }
+        = msg
+
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    .control-group
+      .form-group.floating-label-form-group.controls
+        %label Email
+        = f.text_field :email, class: "form-control", placeholder: "Email", data: {"validation-required-message": "Ingrese email."}
+        %p.help-block.text-danger
+    %br/
+    #success
+    = f.submit "Enviar", class: "btn btn-primary"
+
+  = render "devise/shared/links"

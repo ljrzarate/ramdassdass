@@ -29,7 +29,7 @@
         const response = await fetch("/paypal/orders", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               post_id: post_id,
@@ -48,7 +48,7 @@
         const response = await fetch(`/paypal/orders/${data.orderID}/captures`, {
           method: "POST",
           headers: {
-              "Content-Type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             post_id: post_id,

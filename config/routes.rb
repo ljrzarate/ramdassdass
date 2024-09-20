@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  namespace :user do
+    resource :dashboard, only: [:show]
+    resource :passwords, only: [:update]
+  end
+
   namespace :paypal do
     resources :orders, only: [:create] do
       resource :captures, only: [:create]

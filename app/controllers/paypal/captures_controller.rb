@@ -4,7 +4,7 @@ class Paypal::CapturesController < Paypal::PaypalController
   def create
     if paypal_order_params[:order_id].present?
       post = Post.find_by(id: paypal_order_params[:post_id])
-      binding.pry
+
       if post.present?
         url = "https://api-m.sandbox.paypal.com/v2/checkout/orders/#{paypal_order_params[:order_id]}/capture"
         headers = {
@@ -15,7 +15,7 @@ class Paypal::CapturesController < Paypal::PaypalController
         response = RestClient.post(url, {}.to_json, headers)
         response_body = JSON.parse(response.body).with_indifferent_access
         @user = create_and_login_user_from_paypay(response_body)
-        binding.pry
+
         if response.code == 200 || response.code == 201
           paypal_order = Order.new(
             user_id: @user.id,
@@ -25,7 +25,7 @@ class Paypal::CapturesController < Paypal::PaypalController
             payment_gateway: :paypal,
             price_cents: post.price_cents
           )
-          binding.pry
+
           paypal_order.save!
           respond_to do |format|
             format.json  { render json: response_body }
@@ -47,7 +47,7 @@ class Paypal::CapturesController < Paypal::PaypalController
     end
     user.save
     sign_in(user)
-    binding.pry
+
     user
   end
 
