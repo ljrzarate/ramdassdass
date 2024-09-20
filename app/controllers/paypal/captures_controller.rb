@@ -14,6 +14,10 @@ class Paypal::CapturesController < Paypal::PaypalController
 
         response = RestClient.post(url, {}.to_json, headers)
         response_body = JSON.parse(response.body).with_indifferent_access
+
+        Rails.logger.info "*" * 40
+        Rails.logger.info response_body
+        Rails.logger.info "*" * 40
         @user = create_and_login_user_from_paypay(response_body)
 
         if response.code == 200 || response.code == 201
@@ -40,6 +44,7 @@ class Paypal::CapturesController < Paypal::PaypalController
   def create_and_login_user_from_paypay(response_body)
     user = User.find_or_initialize_by(email: response_body[:payer][:email_address])
     if user.new_record?
+      user.payer_id              = response_body[:payer][:payer_id]
       user.password              = response_body[:payer][:payer_id]
       user.password_confirmation = response_body[:payer][:payer_id]
       user.first_name            = response_body[:payer][:name][:given_name]
