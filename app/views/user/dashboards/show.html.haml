@@ -10,19 +10,19 @@
     .control-group
       .form-group.floating-label-form-group.controls
         %label Contraseña actual
-        = form.text_field :current_password, class: "form-control", id: "current_password", placeholder: "Contraseña actual", data: {"validation-required-message": "Ingrese contraseña actual."}
+        = form.password_field :current_password, class: "form-control", id: "current_password", placeholder: "Contraseña actual", data: {"validation-required-message": "Ingrese contraseña actual."}
         %p.help-block.text-danger
 
     .control-group
       .form-group.floating-label-form-group.controls
         %label Nueva contraseña
-        = form.text_field :confirm_password, class: "form-control", placeholder: "Nueva contraseña", data: {"validation-required-message": "Ingrese nueva contraseña."}
+        = form.password_field :password, class: "form-control", placeholder: "Nueva contraseña", data: {"validation-required-message": "Ingrese nueva contraseña."}
         %p.help-block.text-danger
 
     .control-group
       .form-group.floating-label-form-group.controls
         %label Confirma nueva contraseña
-        = form.text_field :message, class: "form-control", placeholder: "Confirma nueva contraseña", rows: 5, data: {"validation-required-message": "Confirme la nueva contraseña."}
+        = form.password_field :password_confirmation, class: "form-control", placeholder: "Confirma nueva contraseña", rows: 5, data: {"validation-required-message": "Confirme la nueva contraseña."}
         %p.help-block.text-danger
 
     %br/

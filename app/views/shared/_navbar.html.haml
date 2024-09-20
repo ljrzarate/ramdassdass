@@ -11,13 +11,13 @@
             = link_to current_user.first_name, user_dashboard_path, class: "nav-link"
         %li.nav-item
           = link_to "Spirituality for Devs!", spirituality_for_devs_path, class: "nav-link"
-        %li.nav-item
-          - if current_user.present?
-            = link_to "Salir", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link"
-          - else
-            = link_to "Iniciar", new_user_session_path, class: "nav-link"
         - if params[:action] == "show"
           %hr/
           %li.nav-item
             = link_to "prev: #{@next_post.title}", post_path(@next_post.friendly_id), class: "nav-link" if @next_post
             = link_to "next: #{@prev_post.title}", post_path(@prev_post.friendly_id), class: "nav-link" if @prev_post
+        %li.nav-item
+          - if current_user.present?
+            = link_to "Salir", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link"
+          - else
+            = link_to "Iniciar", new_user_session_path, class: "nav-link"
