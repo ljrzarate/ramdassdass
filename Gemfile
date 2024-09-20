@@ -41,6 +41,8 @@ gem 'jquery-rails'
 gem 'popper_js'
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 gem 'rest-client'
+gem "redis"
+gem "redis-actionpack"
 
 
 group :development, :test do

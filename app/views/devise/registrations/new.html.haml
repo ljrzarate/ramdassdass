@@ -20,8 +20,6 @@
           %em
             (#{@minimum_password_length} characters minimum)
         %br/
-        = f.password_field :password
-
         = f.password_field :password, class: "form-control", placeholder: "Contraseña", data: {"validation-required-message": "Ingrese contraseña."}
         %p.help-block.text-danger
     .control-group

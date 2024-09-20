@@ -47,7 +47,7 @@ class Paypal::CapturesController < Paypal::PaypalController
     end
     user.save
     sign_in(user)
-
+    WelcomeEmailJob.perform_later(user.id)
     user
   end
 
