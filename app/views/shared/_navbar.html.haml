@@ -6,8 +6,9 @@
       %i.fas.fa-bars
     #navbarResponsive.collapse.navbar-collapse
       %ul.navbar-nav.ml-auto
-        -# %li.nav-item
-        -#   = link_to "Say Hi!", contact_index_path, class: "nav-link"
+        - if current_user.present?
+          %li.nav-item
+            = link_to current_user.first_name, contact_index_path, class: "nav-link"
         %li.nav-item
           = link_to "Spirituality for Devs!", spirituality_for_devs_path, class: "nav-link"
         - if params[:action] == "show"
