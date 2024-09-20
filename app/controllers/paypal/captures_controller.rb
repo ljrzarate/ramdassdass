@@ -21,14 +21,15 @@ class Paypal::CapturesController < Paypal::PaypalController
         @user = create_and_login_user_from_paypay(response_body)
 
         if response.code == 200 || response.code == 201
-          paypal_order = Order.new(
-            user_id: @user.id,
+          paypal_order = Order.find_by(
+            token: session[:paypal_order_id],
             post_id: post.id,
-            status: Order.statuses[:paypal_executed],
-            charge_id: response_body[:id],
-            payment_gateway: :paypal,
-            price_cents: post.price_cents
+            status: Order.statuses[:pending]
           )
+          paypal_order.user_id = @user.id
+          paypal_order.status = Order.statuses[:paypal_executed]
+          paypal_order.charge_id = response_body[:id]
+          paypal_order.payment_gateway = :paypal
 
           paypal_order.save!
           respond_to do |format|
@@ -49,10 +50,10 @@ class Paypal::CapturesController < Paypal::PaypalController
       user.password_confirmation = response_body[:payer][:payer_id]
       user.first_name            = response_body[:payer][:name][:given_name]
       user.last_name             = response_body[:payer][:name][:surname]
+      user.save!
+      WelcomeEmailJob.perform_later(user.id)
     end
-    user.save
     sign_in(user)
-    WelcomeEmailJob.perform_later(user.id)
     user
   end
 

@@ -11,7 +11,7 @@ class User::PasswordsController < ApplicationController
       sign_in @user, bypass: true
       redirect_to user_dashboard_path, flash: { success: "Successfully updated password" }
     else
-      render "edit"
+      redirect_to user_dashboard_path, flash: { alert: @user.errors.full_messages.to_sentence }
     end
   end
 
