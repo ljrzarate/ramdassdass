@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
 
   namespace :paypal do
-    resource :orders, only: [:create]
+    resources :orders, only: [:create] do
+      resource :captures, only: [:create]
+    end
   end
 
   resources :chapters, only: [:index]

@@ -15,6 +15,7 @@ class Post < ApplicationRecord
   has_one_attached :main_image
   has_many_attached :images
   has_many :comments
+  has_many :orders
 
   scope :published, lambda { where(published: true, is_box: false) }
   scope :unpublished, lambda { where(published: false, is_box: false) }

@@ -11,8 +11,16 @@
   %script{:src => "https://sandbox.paypal.com/sdk/js?client-id=AX8h7DwgyNyRPMzhbgGJ9SRmu4ltSkXqQuqQJzURcbjOtuSbcIY5JQp3inI8wNfJVeFU2GG8bZIT0bG8"}
   :javascript
     paypal.Buttons({
+      env: "#{ENV['PAYPAL_ENV']}",
+      style: {
+        layout: "vertical",
+        borderRadius: 10,
+        color: "blue",
+        shape: "rect",
+      },
       async createOrder() {
         const post_sku = '#{@post.slug}'
+        const post_id = '#{@post.id}'
         const donation_value = $("#donationValue").val()
         const response = await fetch("/paypal/orders", {
             method: "POST",
@@ -20,6 +28,7 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              post_id: post_id,
               cart: [{
                   sku: post_sku,
                   quantity: 1,
@@ -30,10 +39,19 @@
         const order = await response.json();
         return order.id;
       },
-      style: {
-        layout: "vertical",
-        borderRadius: 10,
-        color: "blue",
-        shape: "rect",
+      async onApprove(data) {
+        const post_id = '#{@post.id}'
+        const response = await fetch(`/paypal/orders/${data.orderID}/captures`, {
+          method: "POST",
+          body: JSON.stringify({
+            order_id: data.orderID,
+            post_id: post_id
+          })
+        })
+
+        const details = await response.json();
+
+        // Show success message to buyer
+        alert(`Transaction completed by ${details.payer.name.given_name}`);
       }
     }).render('.paypal-conteiner');
