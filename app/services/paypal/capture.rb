@@ -1,32 +1,28 @@
 class Paypal::Capture
   URL = "https://api-m.sandbox.paypal.com/v2/checkout/orders/__:id__/capture"
 
-  attr_reader :post, :params, :session_paypal_order_id
+  attr_reader :post, :params, :order_id
 
   def initialize(params: {})
     @access_token = params[:access_token]
     @params = params
     @post = Post.find_by(id: params[:post_id])
-    @session_paypal_order_id = params[:session_paypal_order_id]
+    @order_id = params[:order_id]
   end
 
   def execute
-    return unless params[:order_id].present?
+    return unless order_id.present?
     return unless post.present?
 
-    url = URL.gsub("__:id__", params[:order_id])
+    url = URL.gsub("__:id__", order_id)
     response = RestClient.post(url, {}.to_json, headers)
     response_body = JSON.parse(response.body).with_indifferent_access
 
     if response.code == 200 || response.code == 201
+
       user = create_and_login_user_from_paypay(response_body[:payer])
       charge_id = response_body[:purchase_units][0][:payments][:captures][0][:id] # uff
-
-      find_and_update_order_record_for(
-        user: user,
-        session_paypal_order_id: session_paypal_order_id,
-        charge_id: charge_id
-      )
+      find_and_update_order_record_for(user: user, charge_id: charge_id)
 
       {
         user: user,
@@ -38,9 +34,9 @@ class Paypal::Capture
 
   private
 
-  def find_and_update_order_record_for(user:, session_paypal_order_id:, charge_id:)
+  def find_and_update_order_record_for(user:, charge_id:)
     order = Order.find_by(
-      token: session_paypal_order_id,
+      token: order_id,
       post_id: post.id,
       status: Order.statuses[:pending]
     )
