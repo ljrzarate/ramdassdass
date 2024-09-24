@@ -16,9 +16,3 @@
             - shelf.posts_non_boxes_non_parent.each do |box|
               = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
                 = box.title.titleize
-
-        =#- else
-        =#  = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
-        =#    .d-flex.gap-4
-        =#      %p.m-0= "#{shelf.name.titleize}:"
-        =#      %span= "Total: #{shelf.posts_non_boxes.count}"
