@@ -5,14 +5,15 @@
       = link_to link_with_params do
         %h2.mt-0.post-title= post.title
         %h3.post-subtitle= post.summary
-      %div.next-prev-wrapper
-        %p.mb-0.post-meta
-          = link_to "Read More", link_with_params
+      %div.next-prev-wrapper.d-flex{style: "align-items: flex-end;"}
+        .mb-0.post-meta
+          = link_to "Seguir Leyendo", link_with_params, class: "btn btn-secondary", html: {style: "width: 230px;"}
+        .mb-0.post-meta
           - post.tags.each do |tag|
             - link_with_params_for_tag = params[:show_draft].present? ? posts_path(show_draft: true, tag: tag.name) : posts_path(tag: tag.name)
             = link_to link_with_params_for_tag do
               %span.badge.badge-pill.badge-brown=tag.name
-        %p.mb-0.post-meta
+        .mb-0.post-meta
           = post.created_at.strftime("%B %d, %Y")
 
     %hr/
