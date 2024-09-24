@@ -39,4 +39,6 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
+
+  Rails.application.default_url_options = Rails.application.config.action_mailer.default_url_options
 end
