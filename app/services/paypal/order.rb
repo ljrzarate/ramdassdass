@@ -18,7 +18,6 @@ class Paypal::Order
         paypal_order_id = response_from_paypal[:id]
         create_order_record(paypal_order_id)
       end
-
     end
     paypal_order_id
   end
