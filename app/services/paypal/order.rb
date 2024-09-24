@@ -17,7 +17,6 @@ class Paypal::Order
       if response_from_paypal.code == 200 || response_from_paypal.code == 201
         paypal_order_id = response_from_paypal[:id]
         create_order_record(paypal_order_id)
-        save_paypal_order_in_session(paypal_order_id)
       end
 
     end
@@ -33,10 +32,6 @@ class Paypal::Order
       status: Order.statuses[:pending],
       price_cents: (100 * total_donation.to_r).to_i # Convert dollars to cents
     )
-  end
-
-  def save_paypal_order_in_session(paypal_order_id)
-    session[:paypal_order_id] = paypal_order_id
   end
 
   def create_order_on_paypal
@@ -71,6 +66,7 @@ class Paypal::Order
   def total_donation
     total_donation = 0
     params[:cart].each { |item| total_donation += item[:donation_value].to_f }
+    total_donation
   end
 
   def payload
