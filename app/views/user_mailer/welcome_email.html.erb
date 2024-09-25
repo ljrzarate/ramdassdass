@@ -5,20 +5,20 @@
   <body>
     <h1>Bienvenido a ramminti.co <%= @user.email %></h1>
     <pre>
-      Hemos creado una cuenta para ti y con tu donacion podras tener acceso a tus capitulos privados.
-      Tambien desde la pagina, haciendo click en tu nombre, podras cambiar tu contraseña y ver la lista de caps privados que tienes.
+      Hemos creado una cuenta para ti y con tu donación podrás tener acceso a tus capítulos privados.
+      También desde la página, haciendo click en tu nombre, podrás cambiar tu contraseña y ver la lista de capítulos privados que tienes.
 
       <%- if @user.payer_id.present? %>
         Credenciales para iniciar sesión:
         email: <%= @user.email %>
-        password: <%= @user.payer_id %>
+        contraseña: <%= @user.payer_id %>
       <%- end %>
     </pre>
     <br/>
-    <p>
-      Have a great day brother/sister
-    </p>
+    <pre>
+      Ten un buen día amige.
+    </pre>
     <br/>
-    <p>Thanks for joining!</p>
+    <pre>Gracias por unirte!</pre>
   </body>
 </html>
