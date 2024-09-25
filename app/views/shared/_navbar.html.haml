@@ -21,3 +21,14 @@
             = link_to "Salir", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link"
           - else
             = link_to "Iniciar", new_user_session_path, class: "nav-link"
+        %hr/
+        - if device == :mobile
+          %li
+            %button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed{"aria-expanded" => "false", "data-bs-target" => "#account-collapse", "data-bs-toggle" => "collapse"}
+              = "-> Estantes"
+            #account-collapse.collapse{:style => ""}
+              %ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small
+                - @shelves.each do |shelf|
+                  %li
+                    = link_to "#{posts_path(tag: shelf.slug)}", class: "link-dark d-inline-flex text-decoration-none rounded" do
+                      = shelf.name.titleize

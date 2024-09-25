@@ -1,18 +1,19 @@
-%nav.navbar
-  %ul.navbar-nav.flex-row.flex-xl-column.flex-wrap.gap-2
-    - @shelves.each do |shelf|
-      %li.d-flex.nav-item.me-4.me-xl-0.gap-4{style: "flex-direction: row; align-items: start;"}
-        =#- if shelf.boxes.any?
-        = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
-          %p.m-0= "#{shelf.name.titleize}:"
-        .d-flex{style: "flex-direction: column;" }
+- if device != :mobile
+  %nav.navbar
+    %ul.navbar-nav.flex-row.flex-xl-column.flex-wrap.gap-2
+      - @shelves.each do |shelf|
+        %li.d-flex.nav-item.me-4.me-xl-0.gap-4{style: "flex-direction: row; align-items: start;"}
+          =#- if shelf.boxes.any?
           = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
-            %span= "Total: #{shelf.posts_non_boxes.count}"
-          - if shelf.slug != 'camino-zero'
-            - shelf.boxes.each do |box|
-              = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
-                = box.title.titleize
-                = "( #{shelf.posts_by_parent_box(box.id).count} )"
-            - shelf.posts_non_boxes_non_parent.each do |box|
-              = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
-                = box.title.titleize
+            %p.m-0= "#{shelf.name.titleize}:"
+          .d-flex{style: "flex-direction: column;" }
+            = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
+              %span= "Total: #{shelf.posts_non_boxes.count}"
+            - if shelf.slug != 'camino-zero'
+              - shelf.boxes.each do |box|
+                = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
+                  = box.title.titleize
+                  = "( #{shelf.posts_by_parent_box(box.id).count} )"
+              - shelf.posts_non_boxes_non_parent.each do |box|
+                = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
+                  = box.title.titleize

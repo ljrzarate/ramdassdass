@@ -1,6 +1,13 @@
 module ApplicationHelper
   RECAPTCHA_SITE_KEY = ENV['RECAPTACH_SITE_KEY']
 
+  def device
+    agent = request.user_agent
+    return :tablet if agent =~ /(tablet|ipad)|(android(?!.*mobile))/i
+    return :mobile if agent =~ /Mobile/
+    return :desktop
+  end
+
   def include_recaptcha_js
     raw %Q{
       <script src="https://www.google.com/recaptcha/api.js?render=#{RECAPTCHA_SITE_KEY}"></script>
