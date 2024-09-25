@@ -22,13 +22,12 @@
           - else
             = link_to "Iniciar", new_user_session_path, class: "nav-link"
         %hr/
-        - if device == :mobile
-          %li
+        - if device == :mobile || device == :tablet
+          %li.d-flex.nav-item.me-4.me-xl-0.gap-4.flex-column
             %button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed{"aria-expanded" => "false", "data-bs-target" => "#account-collapse", "data-bs-toggle" => "collapse"}
               = "-> Estantes"
             #account-collapse.collapse{:style => ""}
-              %ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small
+              %ul.btn-toggle-nav.d-flex.flex-column.align-items-start
                 - @shelves.each do |shelf|
-                  %li
-                    = link_to "#{posts_path(tag: shelf.slug)}", class: "link-dark d-inline-flex text-decoration-none rounded" do
-                      = shelf.name.titleize
+                  %li.d-flex.flex-column.btn.btn-toggle.d-inline-flex.rounded.border-0.collapsed
+                    = link_to shelf.name.titleize, "#{posts_path(tag: shelf.slug)}", class: "nav-link"
