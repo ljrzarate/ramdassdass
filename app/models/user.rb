@@ -1,11 +1,13 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: :destroy
-  has_many :paid_orders, -> { orders.where(status: Order.statuses[:paypal_executed]) }
+
+  def paid_orders
+    orders.where(status: Order.statuses[:paypal_executed]).or(Order.where(status: Order.statuses[:paid]))
+  end
 
   def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)

@@ -40,10 +40,22 @@
         %th{:scope => "col"} Orden ID
         %th{:scope => "col"} Ver
     %tbody
-    - current_user.orders.each_with_index do |order, index|
+    - current_user.paid_orders.each_with_index do |order, index|
       %tr
         %th{:scope => "row"}= index
         %td= order.post.title
         %td= order.price
         %td= order.charge_id
         %td= link_to "Ver", post_path(order.post.friendly_id), class: ""
+
+  %p= "Lista de capitulos privados:"
+  %table.table
+    %thead
+      %tr
+        %th{:scope => "col"} Titulo
+        %th{:scope => "col"} Donar
+    %tbody
+    - @private_chapters.each do |private_chapter|
+      %tr
+        %td= private_chapter.title
+        %td= link_to "Donar", post_path(private_chapter.friendly_id), class: ""
