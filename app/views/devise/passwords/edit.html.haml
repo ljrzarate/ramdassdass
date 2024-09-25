@@ -1,0 +1,29 @@
+.col-lg-4.col-md-10
+  %p= "Cambiar contraseña:"
+  - if flash.any?
+    - flash.each do |type, msg|
+      - alert = type == "alert" ? 'danger' : 'success'
+      %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}", role: "alert" }
+        = msg
+
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    = f.hidden_field :reset_password_token
+    .control-group
+      .form-group.floating-label-form-group.controls
+        %label Nueva contraseña
+        - if @minimum_password_length
+          %em
+            (#{@minimum_password_length} characters minimum)
+        = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control", placeholder: "Nueva Contraseña"
+        %p.help-block.text-danger
+    .control-group
+      .form-group.floating-label-form-group.controls
+        = f.label :password_confirmation, "Confirma nueva contraseña"
+        %p.help-block.text-danger
+        = f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "form-control", placeholder: "Confirma Nueva Contraseña"
+    %br/
+    #success
+    = f.submit "Cambiar Contraseña", class: "btn btn-primary"
+
+    = render "devise/shared/links"
