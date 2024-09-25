@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: :destroy
+  has_many :paid_orders, -> { orders.where(status: Order.statuses[:paypal_executed]) }
 
   def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)

@@ -15,7 +15,7 @@
   %script{:src => "#{ENV['PAYPAL_BASE_URL']}" + "/sdk/js?client-id=" + "#{ENV['PAYPAL_CLIENT_ID']}"}
   :javascript
     paypal.Buttons({
-      env: "#{ENV['PAYPAL_ENV']}"
+      env: "#{ENV['PAYPAL_ENV']}",
       style: {
         layout: "vertical",
         borderRadius: 10,

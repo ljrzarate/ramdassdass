@@ -51,15 +51,16 @@ class Paypal::Capture
 
   def create_and_login_user_from_paypay(user_data_from_paypal)
     user = User.find_or_initialize_by(email: user_data_from_paypal[:email_address])
+
     if user.new_record?
-      user.payer_id              = user_data_from_paypal[:payer_id]
       user.password              = user_data_from_paypal[:payer_id]
       user.password_confirmation = user_data_from_paypal[:payer_id]
-      user.first_name            = user_data_from_paypal[:name][:given_name]
-      user.last_name             = user_data_from_paypal[:name][:surname]
-      user.save!
-      WelcomeEmailJob.perform_later(user.id)
     end
+
+    user.payer_id = user_data_from_paypal[:payer_id] if !user.new_record? && !user.payer_id.present?
+    user.first_name = user_data_from_paypal[:name][:given_name]
+    user.last_name  = user_data_from_paypal[:name][:surname]
+    user.save!
     user
   end
 
