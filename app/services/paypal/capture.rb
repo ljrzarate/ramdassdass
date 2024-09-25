@@ -56,8 +56,7 @@ class Paypal::Capture
       user.password              = user_data_from_paypal[:payer_id]
       user.password_confirmation = user_data_from_paypal[:payer_id]
     end
-
-    user.payer_id = user_data_from_paypal[:payer_id] if !user.new_record? && !user.payer_id.present?
+    user.payer_id   = user_data_from_paypal[:payer_id] if user.payer_id.blank?
     user.first_name = user_data_from_paypal[:name][:given_name]
     user.last_name  = user_data_from_paypal[:name][:surname]
     user.save!
