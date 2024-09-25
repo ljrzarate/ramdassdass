@@ -12,10 +12,10 @@
   = render partial: "posts/comment_list", locals: { comments: @comments }
 
 = content_for :paypay_buttons do
-  %script{:src => "https://sandbox.paypal.com/sdk/js?client-id=AX8h7DwgyNyRPMzhbgGJ9SRmu4ltSkXqQuqQJzURcbjOtuSbcIY5JQp3inI8wNfJVeFU2GG8bZIT0bG8"}
+  %script{:src => "#{ENV['PAYPAL_BASE_URL']}" + "/sdk/js?client-id=" + "#{ENV['PAYPAL_CLIENT_ID']}"}
   :javascript
     paypal.Buttons({
-      env: "#{ENV['PAYPAL_ENV']}",
+      env: "#{ENV['PAYPAL_ENV']}"
       style: {
         layout: "vertical",
         borderRadius: 10,

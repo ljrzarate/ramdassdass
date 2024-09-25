@@ -1,5 +1,5 @@
 class Paypal::Capture
-  URL = "https://api-m.sandbox.paypal.com/v2/checkout/orders/__:id__/capture"
+  URL = "#{ENV['PAYPAL_BASE_API_URL']}" + "/v2/checkout/orders/__:id__/capture"
 
   attr_reader :post, :params, :order_id
 

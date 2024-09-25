@@ -1,5 +1,5 @@
 class Paypal::Order
-  URL = "https://api-m.sandbox.paypal.com/v2/checkout/orders"
+  URL = "#{ENV['PAYPAL_BASE_API_URL']}" + "/v2/checkout/orders"
   include Rails.application.routes.url_helpers
 
   attr_reader :params, :post

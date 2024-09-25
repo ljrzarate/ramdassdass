@@ -1,5 +1,5 @@
 class Paypal::Token
-  URL = "https://api-m.sandbox.paypal.com/v1/oauth2/token"
+  URL = "#{ENV['PAYPAL_BASE_API_URL']}" + "/v1/oauth2/token"
 
   attr_reader :paypal_client_id, :paypal_secret_key
 
