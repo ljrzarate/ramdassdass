@@ -1,6 +1,6 @@
 %h5= "Lista de capítulos privados:"
 .border.border-opacity-10.rounded-3.p-4.mt-3
-  %table.table.table-hover.mb-0
+  %table.table.table-hover.mb-0.js-private-chapters-table
     %thead
       %tr
         %th.border-top-0{:scope => "col"} Título
@@ -9,6 +9,6 @@
       - @private_chapters.each do |private_chapter|
         %tr
           %td.border-bottom-0= private_chapter.title
-          %td.border-bottom-0= link_to "Donar", post_path(private_chapter.friendly_id), class: ""
+          %td.border-bottom-0= link_to "Donar", post_path(private_chapter.friendly_id), class: "js-link-to-post"
 
 %hr.my-5/

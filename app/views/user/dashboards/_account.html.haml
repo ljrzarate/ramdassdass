@@ -1,6 +1,7 @@
 %h3= "Tu cuenta"
-.col-8
-  %p= "Enviamos un email a tu correo: #{current_user.email} con tu contraseña actual, aquí podrás cambiarla:"
+.col-10
+  %p= "email: #{current_user.email}"
+  %p{style: "font-style: italic"}= "nota: mira tu email si no sabes tu contraseña actual, o haz click en 'salir' -> 'olvide la contraseña'"
   %h5= "Actualizar contraseña:"
   - if flash.any?
     - flash.each do |type, msg|
@@ -30,3 +31,5 @@
     %br/
     #success
     = form.submit "Guardar", class: "btn btn-primary"
+    %br/
+    = link_to "Olvidaste tu contraseña?", new_password_path(current_user), class: "nav-link"

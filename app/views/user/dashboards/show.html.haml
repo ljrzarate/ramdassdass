@@ -7,3 +7,12 @@
   = render partial: "user/dashboards/private_chapters", locals: {private_chapters: @private_chapters}
 
   = render partial: "user/dashboards/account"
+  :javascript
+    (function(){
+      $( document ).ready(function() {
+        $( ".js-private-chapters-table tbody" ).on( "click", "tr", function() {
+          const postLink = $(this).find("a.js-link-to-post").attr('href');
+          window.location.pathname = postLink;
+        });
+      })
+    })();

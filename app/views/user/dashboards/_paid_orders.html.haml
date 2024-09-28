@@ -1,7 +1,7 @@
-.col-10
+.col-12.offset-2
   %h5= "Lista de capítulos privados a los que tienes accesso:"
   .border.border-opacity-10.rounded-3.p-4.mt-3
-    %table.table.table-hover.mb-0
+    %table.table.table-hover.mb-0.js-paid-orders-table
       %thead
         %tr
           %th.border-top-0{:scope => "col"} #
@@ -11,11 +11,11 @@
           %th.border-top-0{:scope => "col"} Ver
       %tbody
         - current_user.paid_orders.each_with_index do |order, index|
-          %tr
+          %tr{id: "#paid_order_#{index}"}
             %th{:scope => "row"}= index
             %td.border-bottom-0= order.post.title
             %td.border-bottom-0= order.price
             %td.border-bottom-0= order.charge_id
-            %td.border-bottom-0= link_to "Ver", post_path(order.post.friendly_id), class: ""
+            %td.border-bottom-0= link_to "Ver", post_path(order.post.friendly_id), class: "js-link-to-post"
 
   %hr.my-5/
