@@ -1,0 +1,32 @@
+%h3= "Tu cuenta"
+.col-8
+  %p= "Enviamos un email a tu correo: #{current_user.email} con tu contraseña actual, aquí podrás cambiarla:"
+  %h5= "Actualizar contraseña:"
+  - if flash.any?
+    - flash.each do |type, msg|
+      - alert = type == "alert" ? 'danger' : 'success'
+      %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}", role: "alert" }
+        = msg
+
+  = form_with url: user_passwords_path, method: :put  do |form|
+    .control-group
+      .form-group.floating-label-form-group.controls
+        %label Contraseña actual
+        = form.password_field :current_password, class: "form-control", type: "password", id: "current_password", placeholder: "Contraseña actual", data: {"validation-required-message": "Ingrese contraseña actual."}
+        %p.help-block.text-danger
+
+    .control-group
+      .form-group.floating-label-form-group.controls
+        %label Nueva contraseña
+        = form.password_field :password, class: "form-control", placeholder: "Nueva contraseña", data: {"validation-required-message": "Ingrese nueva contraseña."}
+        %p.help-block.text-danger
+
+    .control-group
+      .form-group.floating-label-form-group.controls
+        %label Confirma nueva contraseña
+        = form.password_field :password_confirmation, class: "form-control", placeholder: "Confirma nueva contraseña", rows: 5, data: {"validation-required-message": "Confirme la nueva contraseña."}
+        %p.help-block.text-danger
+
+    %br/
+    #success
+    = form.submit "Guardar", class: "btn btn-primary"

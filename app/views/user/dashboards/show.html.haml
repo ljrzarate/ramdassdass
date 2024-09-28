@@ -1,61 +1,9 @@
-.col-lg-4.col-md-10
-  %p= "Enviamos un email a tu correo: #{current_user.email} con tu contraseña actual, aqui podras cambiarla:"
-  - if flash.any?
-    - flash.each do |type, msg|
-      - alert = type == "alert" ? 'danger' : 'success'
-      %div.col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.alert{class: "alert-#{alert}", role: "alert" }
-        = msg
+.d-flex.flex-column.align-items-center.my-3
+  - if current_user.paid_orders.any?
+    = render partial: "user/dashboards/paid_orders"
+  - else
+    = render partial: "user/dashboards/orders_empty_state"
 
-  = form_with url: user_passwords_path, method: :put  do |form|
-    .control-group
-      .form-group.floating-label-form-group.controls
-        %label Contraseña actual
-        = form.password_field :current_password, class: "form-control", id: "current_password", placeholder: "Contraseña actual", data: {"validation-required-message": "Ingrese contraseña actual."}
-        %p.help-block.text-danger
+  = render partial: "user/dashboards/private_chapters", locals: {private_chapters: @private_chapters}
 
-    .control-group
-      .form-group.floating-label-form-group.controls
-        %label Nueva contraseña
-        = form.password_field :password, class: "form-control", placeholder: "Nueva contraseña", data: {"validation-required-message": "Ingrese nueva contraseña."}
-        %p.help-block.text-danger
-
-    .control-group
-      .form-group.floating-label-form-group.controls
-        %label Confirma nueva contraseña
-        = form.password_field :password_confirmation, class: "form-control", placeholder: "Confirma nueva contraseña", rows: 5, data: {"validation-required-message": "Confirme la nueva contraseña."}
-        %p.help-block.text-danger
-
-    %br/
-    #success
-    = form.submit "Guardar", class: "btn btn-primary"
-
-.col-lg-4.col-md-10
-  %p= "Lista de capitulos privados a los que tienes accesso:"
-  %table.table
-    %thead
-      %tr
-        %th{:scope => "col"} #
-        %th{:scope => "col"} Titulo
-        %th{:scope => "col"} Donation (usd)
-        %th{:scope => "col"} Orden ID
-        %th{:scope => "col"} Ver
-    %tbody
-    - current_user.paid_orders.each_with_index do |order, index|
-      %tr
-        %th{:scope => "row"}= index
-        %td= order.post.title
-        %td= order.price
-        %td= order.charge_id
-        %td= link_to "Ver", post_path(order.post.friendly_id), class: ""
-
-  %p= "Lista de capitulos privados:"
-  %table.table
-    %thead
-      %tr
-        %th{:scope => "col"} Titulo
-        %th{:scope => "col"} Donar
-    %tbody
-    - @private_chapters.each do |private_chapter|
-      %tr
-        %td= private_chapter.title
-        %td= link_to "Donar", post_path(private_chapter.friendly_id), class: ""
+  = render partial: "user/dashboards/account"

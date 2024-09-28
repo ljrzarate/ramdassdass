@@ -1,0 +1,14 @@
+%h5= "Lista de capítulos privados:"
+.border.border-opacity-10.rounded-3.p-4.mt-3
+  %table.table.table-hover.mb-0
+    %thead
+      %tr
+        %th.border-top-0{:scope => "col"} Título
+        %th.border-top-0{:scope => "col"} Donar
+    %tbody
+      - @private_chapters.each do |private_chapter|
+        %tr
+          %td.border-bottom-0= private_chapter.title
+          %td.border-bottom-0= link_to "Donar", post_path(private_chapter.friendly_id), class: ""
+
+%hr.my-5/

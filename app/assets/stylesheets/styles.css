@@ -10628,7 +10628,8 @@ img::-moz-selection {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 }
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
+/* @media only screen and (min-width: 992px) { */
 	#mainNav {
 		border-bottom: 1px solid transparent;
 		background: transparent;

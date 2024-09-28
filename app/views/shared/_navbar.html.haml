@@ -1,4 +1,4 @@
-%nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+%nav#mainNav.navbar.navbar-expand-xl.navbar-light.fixed-top
   .container
     = link_to "Ramminti", root_path, class: "navbar-brand"
     %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarResponsive", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarResponsive", "data-bs-toggle" => "collapse", type: "button"}
@@ -6,28 +6,30 @@
       %i.fas.fa-bars
     #navbarResponsive.collapse.navbar-collapse
       %ul.navbar-nav.ml-auto
+        %hr/
         - if current_user.present?
           %li.nav-item
             = link_to current_user.first_name, user_dashboard_path, class: "nav-link"
         %li.nav-item
           = link_to "Spirituality for Devs!", spirituality_for_devs_path, class: "nav-link"
-        - if params[:action] == "show"
+        - if params[:action] == "show" && (@next_post || @prev_post)
           %hr/
           %li.nav-item
             = link_to "prev: #{@next_post.title}", post_path(@next_post.friendly_id), class: "nav-link" if @next_post
             = link_to "next: #{@prev_post.title}", post_path(@prev_post.friendly_id), class: "nav-link" if @prev_post
+          %hr/
         %li.nav-item
           - if current_user.present?
             = link_to "Salir", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link"
           - else
             = link_to "Iniciar", new_user_session_path, class: "nav-link"
         %hr/
-        - if device == :mobile || device == :tablet
-          %li.d-flex.nav-item.me-4.me-xl-0.gap-4.flex-column
-            %button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed{"aria-expanded" => "false", "data-bs-target" => "#account-collapse", "data-bs-toggle" => "collapse"}
+        %div.d-block.d-xl-none
+          %li.nav-item.me-4.me-xl-0.gap-4.d-flex.flex-column
+            %button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed{"aria-expanded" => "false", "data-bs-target" => "#account-collapse", "data-bs-toggle" => "collapse", style: "font-size: 12px;"}
               = "-> Estantes"
             #account-collapse.collapse{:style => ""}
               %ul.btn-toggle-nav.d-flex.flex-column.align-items-start
                 - @shelves.each do |shelf|
-                  %li.d-flex.flex-column.btn.btn-toggle.d-inline-flex.rounded.border-0.collapsed
+                  %li.d-flex.flex-column.btn.btn-toggle.d-inline-flex.rounded.border-0.collapsed{style: "font-size: 12px;"}
                     = link_to shelf.name.titleize, "#{posts_path(tag: shelf.slug)}", class: "nav-link"

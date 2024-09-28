@@ -20,9 +20,10 @@ class Paypal::Capture
     url = URL.gsub("__:id__", order_id)
     response = RestClient.post(url, {}.to_json, headers)
     response_body = JSON.parse(response.body).with_indifferent_access
-    return if response.code != 200 || response.code != 201
+    return unless response.code != 200 || response.code != 201
 
     user = user_creator.new(paypal_attrs: response_body[:payer]).execute
+
     charge_id = response_body[:purchase_units][0][:payments][:captures][0][:id] # uff
 
     order_updater.new(
@@ -31,6 +32,7 @@ class Paypal::Capture
       order_id: order_id,
       post_id: post.id
     ).execute
+
 
     {
       user: user,
