@@ -44,15 +44,17 @@ class Post < ApplicationRecord
   end
 
   def title_to_show_on_main_banner
-    return self.title if self.is_box?
-    return self.title if !self.is_box? && self.parent_box_id.blank?
-    return self.parent_box.title if !self.is_box?
+    PageTitleGenerator.new(
+      instace: self,
+      generator: Posts::PageTitleGenerator
+    ).show_on_main_banner
   end
 
   def image_to_show_on_main_banner
-    return self.main_image if self.is_box?
-    return self.main_image if !self.is_box? && self.parent_box_id.blank?
-    return self.parent_box.main_image if !self.is_box?
+    PageImageGenerator.new(
+      instace: self,
+      generator: Posts::PageImageGenerator
+    ).show_on_main_banner
   end
 
   private

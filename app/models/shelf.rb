@@ -8,11 +8,17 @@ class Shelf < ApplicationRecord
   end
 
   def title_to_show_on_main_banner
-    self.name
+    PageTitleGenerator.new(
+      instace: self,
+      generator: Shelves::PageTitleGenerator
+    ).show_on_main_banner
   end
 
   def image_to_show_on_main_banner
-    nil
+    PageImageGenerator.new(
+      instace: self,
+      generator: Shelves::PageImageGenerator
+    ).show_on_main_banner
   end
 
   def posts_non_boxes
