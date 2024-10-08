@@ -10774,6 +10774,10 @@ header.masthead .site-heading {
 	padding: 200px 0 150px;
 	color: white;
 }
+
+header.masthead .big-names {
+	width: 800px;
+}
 @media only screen and (min-width: 768px) {
 	header.masthead .page-heading,
 	header.masthead .post-heading,
@@ -10787,7 +10791,7 @@ header.masthead .site-heading {
 }
 header.masthead .page-heading h1,
 header.masthead .site-heading h1 {
-	font-size: 50px;
+	font-size: 30px;
 	margin-top: 0;
 }
 header.masthead .page-heading .subheading,
@@ -10804,7 +10808,7 @@ header.masthead .site-heading .subheading {
 @media only screen and (min-width: 768px) {
 	header.masthead .page-heading h1,
 	header.masthead .site-heading h1 {
-		font-size: 80px;
+		font-size: 50px;
 	}
 }
 header.masthead .post-heading h1 {

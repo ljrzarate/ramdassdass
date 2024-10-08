@@ -1,6 +1,14 @@
 module ApplicationHelper
   RECAPTCHA_SITE_KEY = ENV['RECAPTACH_SITE_KEY']
 
+  def main_image_banner_url_helper
+    if @current_box && @current_box.image_to_show_on_main_banner.present?
+      url_for(@current_box.image_to_show_on_main_banner)
+    else
+      asset_url('hanuman.jpg')
+    end
+  end
+
   def device
     agent = request.user_agent
     return :tablet if agent =~ /(tablet|ipad)|(android(?!.*mobile))/i

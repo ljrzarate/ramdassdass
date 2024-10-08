@@ -3,6 +3,18 @@ class Shelf < ApplicationRecord
   friendly_id :name, use: :slugged
   has_many :posts, -> { where( published: true ) }
 
+  def self.tagged_with(tag)
+    where(slug: tag)
+  end
+
+  def title_to_show_on_main_banner
+    self.name
+  end
+
+  def image_to_show_on_main_banner
+    nil
+  end
+
   def posts_non_boxes
     posts.where(is_box: false)
   end

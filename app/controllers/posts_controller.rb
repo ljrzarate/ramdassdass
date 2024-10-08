@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
 
   def index
+    @current_boxes = Shelf.where(slug: params[:tag])
+
+    @current_boxes = Post.where(is_box: true) unless @current_boxes.present?
+    @current_box   = @current_boxes.tagged_with(params[:tag]).first
+    @current_box   = Post.tagged_with(params[:tag]).first unless @current_box.present?
+
     @active_posts = Posts::ByTags.new(tag: params[:tag], scope: @active_posts).execute if params[:tag].present?
     @active_posts = @active_posts.paginate(page: params[:page]).order('created_at DESC')
   end

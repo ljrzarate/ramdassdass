@@ -1,10 +1,18 @@
 ActiveAdmin.register Post do
+  before_action :set_action_storage_for_dev
+
   filter :title
   filter :is_box
   filter :parent_box, collection: proc { Post.where(is_box: true) }
   filter :shelf
 
   controller do
+    def set_action_storage_for_dev
+      if Rails.env.development?
+        ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
+      end
+    end
+
     def find_resource
       begin
         finder = resource_class.is_a?(FriendlyId) ? :slug : :id
@@ -66,6 +74,24 @@ ActiveAdmin.register Post do
     column :tag_list
     column :summary
     actions
+  end
+
+  show do
+    attributes_table_for(resource) do
+    row :title
+    row :is_private
+    row :price
+    row :published
+    row :is_box
+    row :parent_box_name
+    row :shelf_name
+    row :tag_list
+    row :summary
+    row :main_image do |post|
+      image_tag post.main_image.url, style: "width: 400px; height: 400px;"
+    end
+    end
+    active_admin_comments_for(resource)
   end
 
   form title: 'Create Post' do |f|

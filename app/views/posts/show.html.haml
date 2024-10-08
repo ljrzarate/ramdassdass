@@ -1,3 +1,6 @@
+- content_for :title, flush: true do
+  = @post&.title_to_show_on_main_banner
+
 - paypal_order = nil
 - if current_user.present?
   - paypal_order = current_user.orders.where(post_id: @post.id, status: Order.statuses[:paypal_executed]).first
@@ -57,8 +60,6 @@
         })
 
         const details = await response.json();
-
-        // Show success message to buyer
         window.location.reload();
       }
     }).render('.paypal-conteiner');

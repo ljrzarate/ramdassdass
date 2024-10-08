@@ -43,6 +43,18 @@ class Post < ApplicationRecord
     humanized_money_with_symbol(self.price)
   end
 
+  def title_to_show_on_main_banner
+    return self.title if self.is_box?
+    return self.title if !self.is_box? && self.parent_box_id.blank?
+    return self.parent_box.title if !self.is_box?
+  end
+
+  def image_to_show_on_main_banner
+    return self.main_image if self.is_box? && self.main_image.attached?
+    return self.main_image if !self.is_box? && self.parent_box_id.blank? && self.main_image.attached?
+    return self.parent_box.main_image if !self.is_box? && self.main_image.attached?
+  end
+
   private
 
   def is_box_with_no_parent
