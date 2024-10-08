@@ -1,5 +1,5 @@
 - content_for :title, flush: true do
-  = @post&.title_to_show_on_main_banner
+  = @current_box&.title_to_show_on_main_banner
 
 - paypal_order = nil
 - if current_user.present?
