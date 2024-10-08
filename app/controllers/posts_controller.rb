@@ -15,6 +15,7 @@ class PostsController < ApplicationController
     active_record_posts = params[:show_draft].present? ? Post.unpublished : Post.published
     active_record_posts = active_record_posts.order('created_at DESC')
     @post = active_record_posts.friendly.find(params[:id])
+    @current_box = @post #This is to setup instace variable used on the application_helper
     posts = active_record_posts.map.with_index{ |post, index| { index: index, post: post } }
 
     current_index_post = posts.select { |post| post[:post].id == @post.id }.first[:index]

@@ -50,9 +50,9 @@ class Post < ApplicationRecord
   end
 
   def image_to_show_on_main_banner
-    return self.main_image if self.is_box? && self.main_image.attached?
-    return self.main_image if !self.is_box? && self.parent_box_id.blank? && self.main_image.attached?
-    return self.parent_box.main_image if !self.is_box? && self.main_image.attached?
+    return self.main_image if self.is_box?
+    return self.main_image if !self.is_box? && self.parent_box_id.blank?
+    return self.parent_box.main_image if !self.is_box?
   end
 
   private
