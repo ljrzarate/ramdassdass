@@ -88,7 +88,7 @@ ActiveAdmin.register Post do
     row :tag_list
     row :summary
     row :main_image do |post|
-      image_tag post.main_image.url, style: "width: 400px; height: 400px;"
+      image_tag post.main_image.url, style: "width: 400px; height: 400px;" if post.main_image.attached?
     end
     end
     active_admin_comments_for(resource)
