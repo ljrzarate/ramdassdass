@@ -1,16 +1,13 @@
 - content_for :title, flush: true do
   = @current_box&.title_to_show_on_main_banner
 
--# - content_for :main_image_banner_url, flush: true do
--#   = url_for(@current_box&.image_to_show_on_main_banner)
-
 .d-flex.flex-column.col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.px-3.px-lg-5.align-self-stretch{:style=>"max-width: 800px; overflow-y: hidden"}
   - @active_posts.each do |post|
     .post-preview
       - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
       = link_to link_with_params do
-        %h2.mt-0.post-title= post.title
-        %h3.post-subtitle= post.summary
+        %h3.mt-0.post-title= post.title
+        %h4.post-subtitle= post.summary
       %div.next-prev-wrapper.d-flex{style: "align-items: flex-end;"}
         .mb-0.post-meta
           = link_to "Seguir Leyendo", link_with_params, class: "btn btn-secondary", html: {style: "width: 230px;"}

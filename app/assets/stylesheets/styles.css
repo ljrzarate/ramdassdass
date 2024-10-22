@@ -2693,8 +2693,8 @@ fieldset:disabled a.btn {
 	border-color: #1f404e;
 }
 .btn-secondary:hover {
-	color: #fff;
-	background-color: #244c5d;
+	color: #244c5d;
+	background-color: #fff;
 	border-color: #244c5d;
 }
 .btn-secondary:focus,
@@ -4251,6 +4251,7 @@ input[type="button"].btn-block {
 }
 
 .nav-link {
+	font-size: 1rem;
 	display: block;
 	padding: 0.5rem 1rem;
 }
@@ -10574,15 +10575,16 @@ img::-moz-selection {
 }
 
 .btn {
-	font-size: 14px;
-	font-weight: 800;
-	padding: 15px 25px;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 10px 25px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	border-radius: 0;
+	border-radius: 5px;
 	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
 		Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
 		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	transition: ease-in-out	0.5s;
 }
 
 .btn-primary {
@@ -10662,7 +10664,7 @@ img::-moz-selection {
 	#mainNav.is-fixed {
 		/* when the user scrolls down, we hide the header right above the viewport */
 		position: fixed;
-		top: -67px;
+		top: -93px;
 		transition: transform 0.2s;
 		border-bottom: 1px solid white;
 		background-color: rgba(255, 255, 255, 0.9);
@@ -10759,6 +10761,13 @@ header.masthead {
 	position: relative;
 	background-size: cover;
 }
+
+@media only screen and (max-width: 768px) {
+	header.masthead {
+		margin-bottom: 2px;
+	}
+}
+
 header.masthead .overlay {
 	position: absolute;
 	top: 0;
@@ -10852,11 +10861,12 @@ header.masthead .post-heading .meta a {
 }
 .post-preview > a:focus,
 .post-preview > a:hover {
+	transition: ease-in-out	0.3s;
 	text-decoration: none;
 	color: #0085a1;
 }
 .post-preview > a > .post-title {
-	font-size: 30px;
+	/* font-size: 26px; */
 	margin-top: 30px;
 	margin-bottom: 10px;
 }
@@ -10880,11 +10890,11 @@ header.masthead .post-heading .meta a {
 	text-decoration: underline;
 	color: #0085a1;
 }
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
 	.post-preview > a > .post-title {
-		font-size: 36px;
+		font-size: 30px;
 	}
-}
+} */
 
 .text-white {
 	color: white;
@@ -10955,4 +10965,20 @@ header.masthead .post-heading .meta a {
 }
 *:first-child + html .digg_pagination {
 	overflow: hidden;
+}
+
+.paypal-container-width {
+	width: 240px;
+}
+
+@media (min-width: 480px) and (max-width: 1199px) {
+	.paypal-container-width {
+		width: 444px;
+	}
+}
+
+@media only screen and (min-width: 1480px) {
+	.paypal-container-width {
+		width: 333px;
+	}
 }

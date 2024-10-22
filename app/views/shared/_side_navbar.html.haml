@@ -1,7 +1,7 @@
 %div.d-none.d-xl-block
   %nav.navbar.p-0
     %ul.navbar-nav.flex-row.flex-xl-column.flex-wrap.gap-2
-      - @shelves.each do |shelf|
+      - @shelves.each_with_index do |shelf, shelf_index|
         %li.d-flex.nav-item.me-4.me-xl-0.gap-4{style: "flex-direction: row; align-items: start;"}
           =#- if shelf.boxes.any?
           = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
@@ -10,10 +10,16 @@
             = link_to "#{posts_path(tag: shelf.slug)}", class: "nav-link" do
               %span= "Total: #{shelf.posts_non_boxes.count}"
             - if shelf.slug != 'camino-zero'
-              - shelf.boxes.each do |box|
+              - shelf.boxes.each_with_index do |box, index_box|
                 = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
                   = box.title.titleize
-                  = "( #{shelf.posts_by_parent_box(box.id).count} )"
-              - shelf.posts_non_boxes_non_parent.each do |box|
+                  = "(#{shelf.posts_by_parent_box(box.id).count})"
+                -if index_box + 1 != shelf.boxes.size
+                  %hr.m-0
+              - shelf.posts_non_boxes_non_parent.each_with_index do |box, index_box|
                 = link_to "#{posts_path(tag: box.slug)}", class: "nav-link" do
                   = box.title.titleize
+                -if index_box + 1 != shelf.boxes.size
+                  %hr.m-0/
+        -if shelf_index + 1 !=  @shelves.size
+          %hr.m-0/

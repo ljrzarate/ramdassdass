@@ -1,17 +1,6 @@
-.d-flex.flex-column.align-items-center
-  .col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.ps-lg-5{:style=>"max-width: 800px; overflow-y: hidden"}
-    %article.my-70
-      = render partial: "shared/breadcrumbs"
-      %h1= post.title
-      %h5
-        - post.tag_list.each do |tag|
-          - link_with_params_for_tag = params[:show_draft].present? ? posts_path(show_draft: true, tag: tag) : posts_path(tag: tag)
-          = link_to link_with_params_for_tag do
-            %span.badge.badge-pill.badge-brown=tag
-      = post.summary + "..."
-  .col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.ps-lg-5.d-flex.flex-column.align-items-center{:style=>"max-width: 800px; overflow-y: hidden"}
-    = image_tag(asset_url("flower_lotus.png"), class: "blankslate-top-img", style: "width: 240px;")
-    .d-flex.align-items-center.flex-column
-      %h5 Si quieres seguir leyendo haz una donación de 2.00 usd o más :)
-      %input#donationValue.form-control{:name => "donationValue", :type => "number", min: 2.0, value: 2.0, step: ".1", :style=>"width: 400px; margin-bottom: 5px;"}
-    .paypal-conteiner{style: "width: 400px;"}
+.col-12.col-xl-3.d-flex.flex-column.justify-content-center.align-items-center.mx-auto.mx-xl-0.position-sticky{:style=>"top: 93px; z-index: 100;"}
+  %h5.text-center Si quieres seguir leyendo haz una donación de 2.00 usd o más :)
+  .d-flex.align-items-center.flex-column
+    = image_tag(asset_url("flower_lotus.png"), class: "blankslate-top-img mb-2", style: "width: 240px;")
+    %input#donationValue.form-control.paypal-container-width{:name => "donationValue", :type => "number", min: 2.0, value: 2.0, step: ".1", :style=>"margin-bottom: 5px;"}
+  .paypal-conteiner.paypal-container-width
