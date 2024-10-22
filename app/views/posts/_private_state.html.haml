@@ -1,6 +1,13 @@
-.col-12.col-xl-3.d-flex.flex-column.justify-content-center.align-items-center.mx-auto.mx-xl-0.position-sticky{:style=>"top: 93px; z-index: 100;"}
-  %h5.text-center Este proyecto es un esfuerzo individual; puedes ayudar donando.
-  .d-flex.align-items-center.flex-column
-    = image_tag(asset_url("flower_lotus.png"), class: "blankslate-top-img mb-2", style: "width: 240px;")
-    %input#donationValue.form-control.paypal-container-width{:name => "donationValue", :type => "number", min: 1.0, value: 1.0, step: ".1", :style=>"margin-bottom: 5px;"}
-  .paypal-conteiner.paypal-container-width
+- if current_user.present? && current_user.paid_orders.map(&:post_id).include?(post.id)
+  .col-12.col-xl-3.d-flex.flex-column.justify-content-center.align-items-center.mx-auto.mx-xl-0.position-sticky{:style=>"top: 93px; z-index: 100;"}
+    %h5.text-center Este proyecto es un esfuerzo individual; puedes ayudar donando.
+    .d-flex.align-items-center.flex-column
+      = image_tag(asset_url("flower_lotus.png"), class: "blankslate-top-img mb-2", style: "width: 240px;")
+      %p= "Gracias por la donacion!"
+- else
+  .col-12.col-xl-3.d-flex.flex-column.justify-content-center.align-items-center.mx-auto.mx-xl-0.position-sticky{:style=>"top: 93px; z-index: 100;"}
+    %h5.text-center Este proyecto es un esfuerzo individual; puedes ayudar donando.
+    .d-flex.align-items-center.flex-column
+      = image_tag(asset_url("flower_lotus.png"), class: "blankslate-top-img mb-2", style: "width: 240px;")
+      %input#donationValue.form-control.paypal-container-width{:name => "donationValue", :type => "number", min: 1.0, value: 1.0, step: ".1", :style=>"margin-bottom: 5px;"}
+    .paypal-conteiner.paypal-container-width
