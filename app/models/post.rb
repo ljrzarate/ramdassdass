@@ -57,6 +57,10 @@ class Post < ApplicationRecord
     ).show_on_main_banner
   end
 
+  def donation_value_price_cent
+    return 100
+  end
+
   private
 
   def is_box_with_no_parent

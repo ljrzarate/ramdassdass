@@ -1,7 +1,7 @@
 - content_for :title, flush: true do
   = @current_box&.title_to_show_on_main_banner
 
-.d-flex.flex-column.col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.px-3.px-lg-5.align-self-stretch{:style=>"max-width: 800px; overflow-y: hidden"}
+.d-flex.flex-column.col-12.col-xl-9.ms-auto.ms-xl-4.me-auto.px-3.px-lg-5.align-self-stretch{:style=>"max-width: 1000px; overflow-y: hidden"}
   - @active_posts.each do |post|
     .post-preview
       - link_with_params = params[:show_draft].present? ? post_path(post.friendly_id, show_draft: true) : post_path(post.friendly_id)
