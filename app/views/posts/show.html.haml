@@ -6,7 +6,7 @@
   - paypal_order = current_user.orders.where(post_id: @post.id, status: Order.statuses[:paypal_executed]).first
 
 = render partial: "posts/post_content", locals: { post: @post }
-= render partial: "posts/private_state", locals: { post: @post }
+=# render partial: "posts/private_state", locals: { post: @post }
 = content_for :comments_on_single_post do
   = render partial: "posts/next_prev_buttons", locals: { next_post: @next_post, prev_post: @prev_post }
   = render partial: "posts/new_comment_form", locals: { post_id: @post.id }
@@ -61,5 +61,3 @@
         window.location.reload();
       }
     }).render('.paypal-conteiner');
-
-    
